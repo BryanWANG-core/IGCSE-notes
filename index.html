@@ -6,20 +6,24 @@
   <title>Bryan's IGCSE Revision Hub</title>
   <style>
     :root {
-      --bg: #0a192f;
-      --card-bg: #161b22;
-      --border: #30363d;
-      --text: #c9d1d9;
-      --accent: #58a6ff;
+      /* Polo Blue Dark Palette */
+      --bg-top: #2b4c7e;
+      --bg-bottom: #162846;
+      --card-bg: #1e385c;
+      --border: #3b5f95;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
+      background: linear-gradient(135deg, var(--bg-top), var(--bg-bottom));
+      background-attachment: fixed;
       color: var(--text);
       margin: 0;
       padding: 40px 20px;
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     header {
@@ -28,13 +32,14 @@
     }
 
     h1 {
-      color: var(--accent);
+      color: #ffffff;
       font-size: 2.2rem;
       margin-bottom: 10px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .subtitle {
-      color: #8b949e;
+      color: #94a3b8;
       font-size: 1.1rem;
     }
 
@@ -52,7 +57,7 @@
     .card {
       background-color: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 20px;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
       display: flex;
@@ -61,21 +66,21 @@
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      border-color: var(--card-accent, var(--accent));
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      transform: translateY(-4px);
+      border-color: var(--card-accent);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
     }
 
     .card h3 {
       margin-top: 0;
-      color: #fff;
+      color: #ffffff;
     }
 
     .tag {
       display: inline-block;
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--card-accent, var(--accent));
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.08);
+      color: var(--card-accent);
+      border: 1px solid var(--card-accent);
       font-size: 0.8rem;
       padding: 2px 8px;
       border-radius: 12px;
@@ -87,13 +92,18 @@
       display: inline-block;
       margin-top: 12px;
       padding: 8px 14px;
-      background-color: var(--card-accent, var(--accent));
-      color: #0d1117;
+      background-color: var(--card-accent);
+      color: #0f172a;
       text-decoration: none;
       font-weight: bold;
       border-radius: 6px;
       font-size: 0.9rem;
       text-align: center;
+    }
+
+    /* Computer Science White Button Text Fix */
+    .card[style*="#f8fafc"] .btn {
+      color: #0f172a;
     }
 
     .btn:hover {
@@ -103,12 +113,12 @@
     footer {
       text-align: center;
       margin-top: 50px;
-      color: #8b949e;
+      color: #cbd5e1;
       font-size: 0.9rem;
     }
 
     footer a {
-      color: var(--accent);
+      color: #38bdf8;
       text-decoration: none;
     }
   </style>
@@ -123,8 +133,8 @@
   <div class="container">
     <div class="grid">
 
-      <!-- Biology -->
-      <div class="card" style="--card-accent: #3fb950;">
+      <!-- Biology (Orange) -->
+      <div class="card" style="--card-accent: #f97316;">
         <div>
           <span class="tag">0610 / 0970</span>
           <h3>🧬 Biology</h3>
@@ -133,8 +143,8 @@
         <a href="biology.html" class="btn">View Notes</a>
       </div>
 
-      <!-- Maths -->
-      <div class="card" style="--card-accent: #f0883e;">
+      <!-- Maths (Yellow) -->
+      <div class="card" style="--card-accent: #eab308;">
         <div>
           <span class="tag">0580</span>
           <h3>📐 Maths</h3>
@@ -143,8 +153,8 @@
         <a href="maths.html" class="btn">View Notes</a>
       </div>
 
-      <!-- Additional Mathematics -->
-      <div class="card" style="--card-accent: #a371f7;">
+      <!-- Additional Mathematics (Purple) -->
+      <div class="card" style="--card-accent: #a855f7;">
         <div>
           <span class="tag">0606</span>
           <h3>🧮 Additional Mathematics</h3>
@@ -153,8 +163,8 @@
         <a href="addmaths.html" class="btn">View Notes</a>
       </div>
 
-      <!-- Physics -->
-      <div class="card" style="--card-accent: #e3b341;">
+      <!-- Physics (Blue) -->
+      <div class="card" style="--card-accent: #3b82f6;">
         <div>
           <span class="tag">0625</span>
           <h3>⚡ Physics</h3>
@@ -163,8 +173,8 @@
         <a href="physics.html" class="btn">View Notes</a>
       </div>
 
-      <!-- Chemistry -->
-      <div class="card" style="--card-accent: #39c5bb;">
+      <!-- Chemistry (Red) -->
+      <div class="card" style="--card-accent: #ef4444;">
         <div>
           <span class="tag">0620</span>
           <h3>🧪 Chemistry</h3>
@@ -173,8 +183,8 @@
         <a href="chemistry.html" class="btn">View Notes</a>
       </div>
 
-      <!-- Computer Science -->
-      <div class="card" style="--card-accent: #58a6ff;">
+      <!-- Computer Science (White) -->
+      <div class="card" style="--card-accent: #f8fafc;">
         <div>
           <span class="tag">0478 / 0984</span>
           <h3>💻 Computer Science</h3>
@@ -183,8 +193,8 @@
         <a href="cs.html" class="btn">View Notes</a>
       </div>
 
-      <!-- ESL -->
-      <div class="card" style="--card-accent: #f778ba;">
+      <!-- ESL (Light Blue) -->
+      <div class="card" style="--card-accent: #38bdf8;">
         <div>
           <span class="tag">0510 / 0511</span>
           <h3>✍️ ESL</h3>
