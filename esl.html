@@ -22,7 +22,6 @@
       line-height: 1.6;
     }
 
-    /* Expanded desktop width */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -54,7 +53,7 @@
     .topic-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 28px;
       margin-top: 25px;
     }
@@ -72,7 +71,6 @@
       margin-bottom: 12px;
     }
 
-    /* Styling for the Sample Essay Box */
     .sample-box {
       background-color: var(--bg);
       border-left: 4px solid var(--accent);
@@ -82,6 +80,7 @@
       color: var(--text);
       white-space: pre-line;
       margin: 15px 0;
+      font-size: 1rem;
     }
 
     .prompt-box {
@@ -90,28 +89,41 @@
       padding: 18px;
       border-radius: 6px;
       margin-bottom: 20px;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
+    }
+
+    .analysis-box {
+      background-color: rgba(34, 197, 94, 0.08);
+      border: 1px solid #22c55e;
+      padding: 18px;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+
+    .analysis-box h4 {
+      color: #4ade80;
+      margin-top: 0;
+      margin-bottom: 10px;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 12px;
-      padding: 10px 18px;
+      padding: 12px 22px;
       background-color: var(--accent);
       color: #0d1117;
       text-decoration: none;
       font-weight: bold;
       border-radius: 6px;
-      font-size: 0.95rem;
+      font-size: 1rem;
       border: none;
       cursor: pointer;
+      transition: opacity 0.2s;
     }
 
     .btn:hover {
       opacity: 0.9;
     }
 
-    /* Controls for the Generator */
     .generator-controls {
       display: flex;
       gap: 15px;
@@ -125,23 +137,13 @@
       border: 1px solid var(--border);
       padding: 10px 14px;
       border-radius: 6px;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       outline: none;
-      min-width: 200px;
+      min-width: 280px;
     }
 
     .generator-controls select:focus {
       border-color: var(--accent);
-    }
-
-    .vocab-badge {
-      display: inline-block;
-      background-color: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      margin: 4px 6px 4px 0;
     }
   </style>
 </head>
@@ -157,83 +159,37 @@
     <div class="topic-card">
       <h2>Bryan's Writing Tips & Structure</h2>
       <ul>
-        <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Use varied linking words (e.g., <em>Furthermore, On top of that, As a result</em>) rather than basic connectors.</li>
-        <li><strong>Word Count Control:</strong> Keep tightly within <strong>120–160 words</strong> so examiners don't dock marks for overlength.</li>
+        <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Use varied linking words rather than basic connectors.</li>
+        <li><strong>Word Count Control:</strong> Keep tightly within the specified range (120–160 or 150–200 words) so examiners don't dock marks for overlength.</li>
       </ul>
     </div>
 
-    <!-- Section 2: Featured Model Answer -->
+    <!-- Section 2: Model Answer Vault Selection -->
     <div class="topic-card">
-      <h2>Featured Model Answer: School Trip Email</h2>
-      
-      <div class="prompt-box">
-        <strong>Task Prompt (Museum Trip):</strong><br>
-        Write an email to a friend about a recent school trip to a museum in another city (120–160 words). Must include:
-        <ul>
-          <li>Explain what you did in class to prepare for the museum trip</li>
-          <li>Describe what you liked about the museum trip</li>
-          <li>Tell your friend about a problem with the museum trip</li>
-        </ul>
-      </div>
-
-      <h3>Sample Response:</h3>
-      <div class="sample-box">
-Dear Ahmad,
-
-How’s it going? I really missed our hangouts! It’s been a while. I hope your whirlwind of studies comes to an end soon. Guess what?
-
-I went to the Grand Egyptian Museum last Thursday again, but it was a school trip this time. We arrived at school extra early so our history teacher could give us an overview of what to expect. They also gave us small maps of the museum, which came in handy when we got separated.
-
-Honestly, my friends weren’t too excited about a museum trip at first, but we all agreed it was awesome at the end! Our guide was so friendly and knowledgeable. Plus, we had the entire place to ourselves! The best part was seeing the colossal statue of Ramses II—it was so majestic!
-
-We were really enjoying ourselves, until the teachers announced it was over. An hour and a half didn’t give us the full experience at all, and we missed some exhibits, which was very disappointing.
-
-Anyways, I should go now. Don’t worry, I’ll send you the photos tonight!
-
-Lots of love,
-[Your Name]
-      </div>
-
-      <h3>Why This Scores High Marks:</h3>
-      <ul>
-        <li>✅ <strong>Covers All 3 Bullet Points:</strong> Mentions prep (history overview & maps), likes (friendly guide, Ramses II statue), and problem (too short, missed exhibits).</li>
-        <li>✅ <strong>Natural Informal Tone:</strong> Great friendly phrases ("How’s it going?", "Guess what?", "Lots of love").</li>
-        <li>✅ <strong>Rich Vocabulary:</strong> Excellent word choices like <em>whirlwind of studies</em>, <em>came in handy</em>, <em>colossal</em>, and <em>majestic</em>.</li>
-      </ul>
-    </div>
-
-    <!-- Section 3: Dynamic AI Practice Generator -->
-    <div class="topic-card">
-      <h2>🤖 Dynamic Sample Essay Generator</h2>
-      <p>Select a task type and topic to generate a dynamic, high-scoring IGCSE ESL prompt and unique model answer every time.</p>
+      <h2>📚 Model Answer Vault</h2>
+      <p>Select a task prompt below to view official exam questions, Band 8/9 sample responses, and mark breakdowns.</p>
       
       <div class="generator-controls">
-        <select id="task-type">
-          <option value="email">Informal Email (120–160 words)</option>
-          <option value="article">School Magazine Article (120–160 words)</option>
-          <option value="report">Formal Report (120–160 words)</option>
+        <select id="task-select">
+          <option value="sports_volunteer">Informal Email: Sports Event Volunteer</option>
+          <option value="website_recommend">Informal Email: Schoolwork Website</option>
+          <option value="magazine_review">Review: Teen Time Magazine</option>
+          <option value="friends_article">Article: Friend Groups vs Best Friend</option>
         </select>
 
-        <select id="topic-type">
-          <option value="tech">Technology & Social Media</option>
-          <option value="school">School & Environment</option>
-          <option value="health">Health & Sports</option>
-        </select>
-
-        <button class="btn" onclick="generateDynamicEssay()">⚡ Generate Prompt & Essay</button>
+        <button class="btn" onclick="loadSelectedEssay()">View Question & Essay</button>
       </div>
 
-      <!-- Output Area -->
+      <!-- Content Output Area -->
       <div id="output-area" style="display: none;">
-        <div class="prompt-box" id="gen-prompt"></div>
-        <h3>Model Response:</h3>
-        <div class="sample-box" id="gen-essay"></div>
-        <h3>Key Vocabulary & Expressions:</h3>
-        <div id="gen-vocab"></div>
+        <div class="prompt-box" id="display-prompt"></div>
+        <h3>Model Answer:</h3>
+        <div class="sample-box" id="display-essay"></div>
+        <div class="analysis-box" id="display-analysis"></div>
       </div>
     </div>
 
-    <!-- Section 4: External Links -->
+    <!-- Section 3: External Links -->
     <div class="topic-card">
       <h2>More Sample Essays & Practice Materials</h2>
       <p>Need extra model answers and practice exercises for exam prep?</p>
@@ -243,179 +199,48 @@ Lots of love,
   </div>
 
   <script>
-    const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-    const dynamicDB = {
-      email: {
-        tech: {
-          openings: [
-            "How are things? I hope you're having a smooth week! You won't believe what arrived in the mail yesterday—a brand-new smartwatch!",
-            "How's it going? Hope exam prep isn't stressing you out too much. Guess what? I finally bought that wireless noise-canceling headset!",
-            "Hope you're doing great! I couldn't wait to write and tell you about the gaming laptop I saved up for!"
-          ],
-          reasons: [
-            "I’ve been struggling to concentrate on my revision lately because of noisy surroundings, so I decided it was time for a serious upgrade.",
-            "My old setup kept crashing during online classes, which was extremely frustrating, so my parents agreed to help me get a reliable replacement.",
-            "I needed a lightweight, portable device for my computer science projects, so I spent weeks comparing models before picking this one."
-          ],
-          features: [
-            "The best part is definitely the battery life—it lasts for three full days without charging! Plus, the display is crisp and vibrant.",
-            "The active noise cancellation is absolutely mind-blowing. The moment I switch it on, background noise completely vanishes like magic.",
-            "What impresses me most is how blazingly fast it operates. Apps open instantly, which saves me tons of time when studying."
-          ],
-          invites: [
-            "Are you free this weekend? You should come over and try it out for yourself—we can test it together!",
-            "Let me know when you're free to hang out. I'd love to show you how it works in person!",
-            "Drop by my house on Sunday if you have time! I'm sure you'll love using it too."
-          ],
-          closings: ["Catch you soon,\nBryan", "Write back when you can,\nBryan", "Talk soon,\nBryan"],
-          vocab: ["noise-canceling", "blazingly fast", "mind-blowing", "concentrate", "upgrade"]
-        },
-        school: {
-          openings: [
-            "How’s everything going? I wanted to share some exciting news about our school's annual science fair that happened last Friday!",
-            "Hope you're having a great week! I'm writing to tell you all about our school's recent sports competition.",
-            "How have you been? You missed an incredible event at school yesterday—our annual charity carnival!"
-          ],
-          reasons: [
-            "I entered the coding competition with two classmates. We spent three full weeks building a mini prototype, which was exhausting but fun.",
-            "I decided to run the 400m track event and the 4x100m relay. I was super nervous beforehand, but adrenaline took over once the race started.",
-            "Our class set up a food stall selling homemade baked goods to raise funds for the local animal shelter."
-          ],
-          features: [
-            "The highlights were definitely the energetic crowds and cheering atmosphere throughout the venue. We even managed to secure second place overall!",
-            "Seeing everyone support each other was amazing. Plus, the judges praised our project's creativity, which made us really proud.",
-            "The overall vibe was fantastic, and everyone was in high spirits throughout the day."
-          ],
-          invites: [
-            "However, the event got delayed for an hour because of a sudden thunderstorm, which was a bit disappointing.",
-            "Unfortunately, the sound system broke down halfway through, causing a minor delay, but we still enjoyed ourselves.",
-            "The only downside was running out of food early due to the huge crowd, but it was still a massive success."
-          ],
-          closings: ["Best wishes,\nBryan", "Write back soon,\nBryan", "Warm regards,\nBryan"],
-          vocab: ["annual", "adrenaline took over", "high spirits", "disappointing", "massive success"]
-        },
-        health: {
-          openings: [
-            "How have you been? I wanted to share a quick update on a new healthy habit I started recently.",
-            "Hope studies aren't wearing you out! Guess what? I decided to revamp my daily routine this week.",
-            "How's life? I'm writing to fill you in on a positive lifestyle change I've been trying out."
-          ],
-          reasons: [
-            "I realized I was feeling sluggish sitting at my desk studying for hours, so I started doing morning jogs and bodyweight exercises.",
-            "After noticing how tired I felt during revision, I decided to fix my sleep schedule and eat nutrient-dense meals like oats and fresh fruit.",
-            "I wanted to build better stamina for sports day, so I committed to a structured workout routine every evening."
-          ],
-          features: [
-            "After just one week, I feel far more energetic during the day and sleep much deeper at night. It made a noticeable difference to my focus.",
-            "My mood has improved dramatically, and I no longer feel drained during long study sessions.",
-            "It felt tough getting up early initially, but the boost in mental clarity throughout the day makes it totally worth it."
-          ],
-          invites: [
-            "Let's go for a jog together at the park this Sunday morning! What do you think?",
-            "Why don't you join me for a session this weekend? It'll be a great way to de-stress!",
-            "You should definitely try it out with me sometime this week!"
-          ],
-          closings: ["Take care,\nBryan", "See you soon,\nBryan", "Cheers,\nBryan"],
-          vocab: ["sluggish", "nutrient-dense", "stamina", "noticeable difference", "mental clarity"]
-        }
-      },
-      article: {
-        tech: {
-          titles: ["Smartphones in Class: Tool or Distraction?", "The Digital Classroom: A Modern Dilemma", "Technology in Education: Finding the Balance"],
-          intros: ["Technology is advancing rapidly, and smartphones have become integral to everyday life. But should they be welcomed inside high school classrooms?"],
-          pros: ["On one hand, smartphones grant instant access to educational resources, online dictionaries, and research materials during group activities."],
-          cons: ["On the other hand, social media alerts and mobile games pose a significant distraction, frequently reducing students' attention spans."],
-          concls: ["In conclusion, mobile devices should be permitted only under strict teacher supervision for specific learning tasks, striking a healthy balance between innovation and focus."],
-          vocab: ["advancing rapidly", "integral", "pose a significant distraction", "strict supervision", "striking a balance"]
-        },
-        school: {
-          titles: ["Building a Greener Campus", "Sustainability at School", "Creating an Eco-Friendly Community"],
-          intros: ["Environmental sustainability is more vital today than ever. How can our school community take meaningful action?"],
-          pros: ["Currently, single-use plastic bottles and discarded paper clutter our rubbish bins daily, which harms our environment."],
-          cons: ["To combat this, the school should install dedicated recycling stations and launch a student-led tree planting initiative."],
-          concls: ["By encouraging reusable water bottles and proper waste sorting, every student can contribute to a cleaner, greener campus."],
-          vocab: ["sustainability", "meaningful action", "single-use", "student-led", "contribute"]
-        },
-        health: {
-          titles: ["Staying Healthy Under Exam Pressure", "Prioritizing Wellbeing During Revision", "Peak Health, Peak Grades"],
-          intros: ["Exam season can be extremely demanding, but prioritizing physical wellbeing is essential for academic performance."],
-          pros: ["Many students pull late-night study sessions and consume unhealthy junk food, resulting in fatigue and poor concentration."],
-          cons: ["Instead, maintaining a balanced diet, drinking plenty of water, and ensuring eight hours of sleep dramatically improves focus."],
-          concls: ["Additionally, taking short exercise breaks—such as brisk walking—clears the mind and alleviates stress naturally."],
-          vocab: ["demanding", "prioritizing", "fatigue", "dramatically improves", "alleviates stress"]
-        }
-      },
-      report: {
-        tech: {
-          titles: ["Report on Computer Lab Upgrades", "Evaluation of School IT Facilities"],
-          intros: ["Purpose:\nThe purpose of this report is to evaluate the current condition of the computer lab and propose necessary technical upgrades."],
-          pros: ["Current Situation:\nWhile the lab houses 30 desktop computers, several monitors are outdated and internet speeds slow down significantly during peak hours."],
-          cons: ["Recommendations:\n1. Upgrade network bandwidth to ensure seamless browsing.\n2. Replace faulty peripherals including keyboards and mice."],
-          concls: ["Conclusion:\nImplementing these measures will enhance digital learning for all students."],
-          vocab: ["evaluate", "necessary upgrades", "outdated", "seamless", "implementing"]
-        },
-        school: {
-          titles: ["Report on Canteen Enhancements", "Assessment of School Dining Facilities"],
-          intros: ["Purpose:\nThis report assesses student feedback regarding current canteen menu options and seating facilities."],
-          pros: ["Key Findings:\nSurveys indicate widespread dissatisfaction with limited healthy food selections and long queue times during recess."],
-          cons: ["Recommendations:\n- Introduce fresh fruits, salads, and nutritious warm meals.\n- Set up an additional express counter to reduce waiting times."],
-          concls: ["Conclusion:\nThese improvements will promote healthier eating habits and improve overall satisfaction."],
-          vocab: ["assesses", "widespread dissatisfaction", "introduce", "nutritious", "overall satisfaction"]
-        },
-        health: {
-          titles: ["Proposal for Fitness Equipment", "Report on Sports Hall Improvements"],
-          intros: ["Purpose:\nThis report outlines the potential benefits of upgrading indoor sports hall equipment for student health."],
-          pros: ["Current State:\nOur current sports hall lacks modern exercise machinery, restricting student sports activities during wet weather."],
-          cons: ["Proposed Solutions:\nInvesting in fundamental equipment like exercise bikes and pull-up stations would allow consistent physical training."],
-          concls: ["Conclusion:\nUpgrading facilities will foster active lifestyles across all year groups."],
-          vocab: ["outlines", "potential benefits", "restricting", "consistent", "foster active lifestyles"]
-        }
-      }
-    };
-
-    function generateDynamicEssay() {
-      const task = document.getElementById('task-type').value;
-      const topic = document.getElementById('topic-type').value;
-      const item = dynamicDB[task][topic];
-
-      let generatedText = "";
-      let promptHTML = "";
-
-      if (task === 'email') {
-        promptHTML = `<strong>Task Prompt (Informal Email - ${topic.toUpperCase()}):</strong><br>Write an email to a friend about a recent development regarding ${topic} (120–160 words). Must include:
+    const essayVault = {
+      sports_volunteer: {
+        prompt: `<strong>Task Prompt (Sports Event Helper):</strong><br>
+        You have decided to help at a sports event taking place in your town next month. Write an email to a friend about this (120–160 words). Must include:
         <ul>
-          <li>Explain why you took action or made a choice regarding this topic</li>
-          <li>Describe what you enjoyed or liked most about it</li>
-          <li>Suggest a time or plan to meet up with your friend</li>
-        </ul>`;
-
-        generatedText = `${getRandom(item.openings)}\n\n${getRandom(item.reasons)}\n\n${getRandom(item.features)} ${getRandom(item.invites)}\n\n${getRandom(item.closings)}`;
-      } else if (task === 'article') {
-        const title = getRandom(item.titles);
-        promptHTML = `<strong>Task Prompt (School Magazine Article):</strong><br>Write an article for your school magazine about ${title} (120–160 words). Include arguments for both sides and a clear conclusion.`;
-        generatedText = `${title}\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
-      } else if (task === 'report') {
-        const title = getRandom(item.titles);
-        promptHTML = `<strong>Task Prompt (Formal Report):</strong><br>Write a formal report for your school authority on ${title} (120–160 words). Include findings and recommendations.`;
-        generatedText = `${title}\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
-      }
-
-      document.getElementById('gen-prompt').innerHTML = promptHTML;
-      document.getElementById('gen-essay').innerText = generatedText;
-
-      const vocabContainer = document.getElementById('gen-vocab');
-      vocabContainer.innerHTML = '';
-      item.vocab.forEach(word => {
-        const badge = document.createElement('span');
-        badge.className = 'vocab-badge';
-        badge.innerText = word;
-        vocabContainer.appendChild(badge);
-      });
-
-      document.getElementById('output-area').style.display = 'block';
-    }
-  </script>
-
-</body>
-</html>
+          <li>Describe the sports event that you are going to help at</li>
+          <li>Say why you decided to help at the sports event</li>
+          <li>Explain what you will be doing at the sports event</li>
+        </ul>`,
+        essay: `Hey Mariam,\n\nI hope you’ve been doing well. I’m so sorry for not writing sooner. Guess what!\n\nI found out our town is holding a 20km marathon to raise funds for our local charities! They were searching for volunteers to help around, and I stepped up. It’ll be taking place around the whole town and tons of local athletes are participating!\n\nYou know how inactive I am—I sit around all day and it’s taking a toll on my body. So, when I heard about it, I knew it was exactly what I needed to get moving. Plus, my mom is always nagging me about getting my face off the phone and making some friends. Hopefully, I’ll meet some nice people my age.\n\nI’ve received my role last Friday, and I’ll be helping with setting up aid stations. I’ll also be handing out refreshments to the athletes while cheering them on. I’m already feeling all giddy just thinking about seeing all the excitement and the competitors’ spirits up close!\n\nAnyway, I’ll write again soon. Stay blessed!\n\nBRYAN`,
+        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
+        <ul>
+          <li>✅ <strong>Bullet Point Coverage:</strong> Clearly details the 20km town marathon, personal motivations (getting active & socializing), and assigned responsibilities (aid station setup & handing out refreshments).</li>
+          <li>✅ <strong>Natural Tone & Vocabulary:</strong> Uses effective colloquial expressions like <em>stepped up</em>, <em>taking a toll on my body</em>, and <em>feeling all giddy</em>.</li>
+        </ul>`
+      },
+      website_recommend: {
+        prompt: `<strong>Task Prompt (Schoolwork Website):</strong><br>
+        You have recently found a website which helped you with your schoolwork, and you want to tell your friend about it. Write an email to a friend telling them about the website (150–200 words). Must include:
+        <ul>
+          <li>Tell your friend how you found the website</li>
+          <li>Describe how the website helped with your schoolwork</li>
+          <li>Mention a small problem you had with the website</li>
+        </ul>`,
+        essay: `Hey Noah,\n\nHow’re things? It’s been a while since we last talked. You won’t believe how much I got in my English mock!\n\nI got 145/150, which is an A*! And it’s all because of this life-saving website called ESL Kings. I came across it while searching for resources to study from, just two weeks ahead. You know me — always the procrastinator.\n\nI’m not exaggerating when I say it’s the best website I’ve found till now. Their top-notch writing samples have improved my vocabulary and sentence structures dramatically. The notes have also been a great help — comprehensive and easy to understand. Trust me, you should check it out, and you’ll thank me later!\n\nUnfortunately, it doesn’t have the latest 2024 writing samples to match the new syllabus. But it’s not a big deal, since the only difference is the word count and essentially everything else is the same.\n\nI must go now. Let me know how your diet has been going so far!\n\nWith love,\n\nBRYAN`,
+        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
+        <ul>
+          <li>✅ <strong>Bullet Point Coverage:</strong> Explains finding it via search 2 weeks prior, details score improvement (145/150 A*), and highlights the lack of updated syllabus samples as a minor issue.</li>
+          <li>✅ <strong>Sophisticated Structure:</strong> Features varied vocabulary such as <em>life-saving</em>, <em>top-notch</em>, and <em>comprehensive</em>.</li>
+        </ul>`
+      },
+      magazine_review: {
+        prompt: `<strong>Task Prompt (Teen Magazine Review):</strong><br>
+        You recently bought a copy of a new magazine aimed at teenagers. Review the magazine to post on your school website (120–160 words). Consider given comments regarding price, article length, topic variety, and photos.`,
+        essay: `Teen Time Magazine: Is It Worth the Hype?\n\nWe’ve all heard the recent buzz about Teen Times. It has become the fastest growing and most trending teenage magazine in recent months. I decided to grab my copy to review here and tell you if it’s worth buying.\n\nOn the one hand, Teen Times covers a wide variety of topics, ranging from beauty and fashion to mental wellbeing and social interactions. This makes it a well-rounded magazine. What’s more, it encompasses fun quizzes, thought-provoking interviews and fascinating visuals that are sure to grip even the most jaded teens.\n\nWhile the scope of subjects is commendable, some crucial topics are only touched upon and lack in-depth analysis. Alongside this, there’s an overemphasis on trends and pop culture, making the magazine prone to getting outdated by new gossip.\n\nOverall, I would highly recommend this magazine to teenagers who want to keep up with the latest trends and stay entertained in an informative way. If you want something more in-depth and detailed though, it’s not for you.`,
+        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
+        <ul>
+          <li>✅ <strong>Balanced Structure:</strong> Organizes content into clear sections: introductory hook, positive features, critical limitations, and a final recommendation.</li>
+          <li>✅ <strong>Advanced Vocabulary:</strong> Uses phraseology like <em>thought-provoking</em>, <em>jaded teens</em>, <em>commendable</em>, and <em>overemphasis</em>.</li>
+        </ul>`
+      },
+      friends_article: {
+        prompt: `<strong>Task Prompt (Friendship Article):</strong><br>
+        In class, you have been talking about whether it is better to have a big group of friends or just one best friend. Write an article for your teacher giving your views (150–200 words).`,
+        essay: `Friends: The More the Better?\n\nFriends are an indispensable part of our lives, and many of us have wondered at one point or another: is it better to have a large group of friends, or just one best friend?\n\nUnarguably, the best aspect of having a best friend is the stronger, authentic, and more meaningful relationship you’ll have, which allows
