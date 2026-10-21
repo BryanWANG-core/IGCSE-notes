@@ -159,8 +159,8 @@
     <div class="topic-card">
       <h2>Bryan's Writing Tips & Structure</h2>
       <ul>
-        <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Memorise atleast 3 advanced vocabulary and 3 advanced linking phrases and 3 idioms.</li>
-        <li><strong>Word Count Control:</strong> Keep tightly within the specified range (120–160 or 150–200 words) to reduce chances of grammar errors etc</li>
+        <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Memorise at least 3 advanced vocabulary words, 3 advanced linking phrases, and 3 idioms.</li>
+        <li><strong>Word Count Control:</strong> Keep tightly within the specified range (120–160 or 150–200 words) to reduce chances of grammar errors, etc.</li>
       </ul>
     </div>
 
@@ -168,7 +168,7 @@
     <div class="topic-card">
       <h2>📚 Model Answer Vault</h2>
       <p>Select a task prompt below to view official exam questions, Band 8/9 sample responses, and mark breakdowns.</p>
-      
+
       <div class="generator-controls">
         <select id="task-select">
           <option value="sports_volunteer">Informal Email: Sports Event Volunteer</option>
@@ -243,4 +243,26 @@
       friends_article: {
         prompt: `<strong>Task Prompt (Friendship Article):</strong><br>
         In class, you have been talking about whether it is better to have a big group of friends or just one best friend. Write an article for your teacher giving your views (150–200 words).`,
-        essay: `Friends: The More the Better?\n\nFriends are an indispensable part of our lives, and many of us have wondered at one point or another: is it better to have a large group of friends, or just one best friend?\n\nUnarguably, the best aspect of having a best friend is the stronger, authentic, and more meaningful relationship you’ll have, which allows you to trust your friend even with the deepest of your secrets. Moreover, having a best friend gives you peace of mind: whatever life throws at you, you’ll find someone ready to help and support you to get back up.\n\nOn the other hand, the diverse backgrounds and perspectives of a broader social network allow you to grow as a person and learn from many people’s experiences. This can make you more tolerant and open-minded. What’s more,
+        essay: `Friends: The More the Better?\n\nFriends are an indispensable part of our lives, and many of us have wondered at one point or another: is it better to have a large group of friends, or just one best friend?\n\nUnarguably, the best aspect of having a best friend is the stronger, authentic, and more meaningful relationship you’ll have, which allows you to trust your friend even with the deepest of your secrets. Moreover, having a best friend gives you peace of mind: whatever life throws at you, you’ll find someone ready to help and support you to get back up.\n\nOn the other hand, the diverse backgrounds and perspectives of a broader social network allow you to grow as a person and learn from many people’s experiences. This can make you more tolerant and open-minded. What’s more, you’ll always have someone to hang around with and more opportunities to socialize.\n\nIn the end, I believe that the best option is the one that fits your personality and preferences. There’s no right or wrong answer; what matters is having friendships that bring happiness and last for a lifetime!`,
+        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
+        <ul>
+          <li>✅ <strong>Cohesive Argumentation:</strong> Balances individual deep connections against wider social circles before concluding thoughtfully.</li>
+          <li>✅ <strong>Rich Linkers & Range:</strong> Uses connectors like <em>Unarguably</em>, <em>On the other hand</em>, and <em>In the end</em> alongside elevated language (<em>indispensable</em>, <em>diverse perspectives</em>).</li>
+        </ul>`
+      }
+    };
+
+    function loadSelectedEssay() {
+      const selectedKey = document.getElementById('task-select').value;
+      const item = essayVault[selectedKey];
+
+      document.getElementById('display-prompt').innerHTML = item.prompt;
+      document.getElementById('display-essay').innerText = item.essay;
+      document.getElementById('display-analysis').innerHTML = item.analysis;
+
+      document.getElementById('output-area').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
