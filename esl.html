@@ -73,12 +73,12 @@
 
     /* Styling for the Sample Essay Box */
     .sample-box {
-      background-color: #0d1117;
+      background-color: var(--bg);
       border-left: 4px solid var(--accent);
       padding: 18px;
       border-radius: 4px;
       font-family: Georgia, serif;
-      color: #c9d1d9;
+      color: var(--text);
       white-space: pre-line;
       margin: 15px 0;
     }
@@ -119,7 +119,7 @@
     }
 
     .generator-controls select {
-      background-color: #0d1117;
+      background-color: var(--bg);
       color: var(--text);
       border: 1px solid var(--border);
       padding: 8px 12px;
@@ -180,173 +180,4 @@ Dear Ahmad,
 
 How’s it going? I really missed our hangouts! It’s been a while. I hope your whirlwind of studies comes to an end soon. Guess what?
 
-I went to the Grand Egyptian Museum last Thursday again, but it was a school trip this time. We arrived at school extra early so our history teacher could give us an overview of what to expect. They also gave us small maps of the museum, which came in handy when we got separated.
-
-Honestly, my friends weren’t too excited about a museum trip at first, but we all agreed it was awesome at the end! Our guide was so friendly and knowledgeable. Plus, we had the entire place to ourselves! The best part was seeing the colossal statue of Ramses II—it was so majestic!
-
-We were really enjoying volunteers, until the teachers announced it was over. An hour and a half didn’t give us the full experience at all, and we missed some exhibits, which was very disappointing.
-
-Anyways, I should go now. Don’t worry, I’ll send you the photos tonight!
-
-Lots of love,
-[Your Name]
-      </div>
-
-      <h3>Why This Scores High Marks:</h3>
-      <ul>
-        <li>✅ <strong>Covers All 3 Bullet Points:</strong> Mentions prep (history overview & maps), likes (friendly guide, Ramses II statue), and problem (too short, missed exhibits).</li>
-        <li>✅ <strong>Natural Informal Tone:</strong> Great friendly phrases ("How’s it going?", "Guess what?", "Lots of love").</li>
-        <li>✅ <strong>Rich Vocabulary:</strong> Excellent word choices like <em>whirlwind of studies</em>, <em>came in handy</em>, <em>colossal</em>, and <em>majestic</em>.</li>
-      </ul>
-    </div>
-
-    <!-- Section 3: NEW AI Question & Sample Essay Generator -->
-    <div class="topic-card">
-      <h2>🤖 Practice Prompt & Sample Essay Generator</h2>
-      <p>Select a task type and topic to generate a dynamic IGCSE ESL prompt along with a Band 8/9 model response.</p>
-      
-      <div class="generator-controls">
-        <select id="task-type">
-          <option value="email">Informal Email (120–160 words)</option>
-          <option value="article">School Magazine Article (120–160 words)</option>
-          <option value="report">Formal Report (120–160 words)</option>
-        </select>
-
-        <select id="topic-type">
-          <option value="tech">Technology & Social Media</option>
-          <option value="school">School & Environment</option>
-          <option value="health">Health & Sports</option>
-        </select>
-
-        <button class="btn" onclick="generatePracticeSet()">⚡ Generate Prompt & Essay</button>
-      </div>
-
-      <!-- Generated Content Output Area -->
-      <div id="output-area" style="display: none;">
-        <div class="prompt-box" id="gen-prompt"></div>
-        <h3>Model Response:</h3>
-        <div class="sample-box" id="gen-essay"></div>
-        <h3>Key Vocabulary & Expressions:</h3>
-        <div id="gen-vocab"></div>
-      </div>
-    </div>
-
-    <!-- Section 4: External Links -->
-    <div class="topic-card">
-      <h2>More Sample Essays & Practice Materials</h2>
-      <p>Need extra model answers and practice exercises for exam prep?</p>
-      <a href="https://eslkings.com" target="_blank" class="btn">View More Sample Essays on ESL Kings ↗</a>
-    </div>
-
-  </div>
-
-  <script>
-    // Safe client-side database for practice generation
-    const practiceDB = {
-      email: {
-        tech: {
-          prompt: `<strong>Task Prompt (New Tech Device):</strong><br>Write an email to a friend telling them about a new electronic device you recently bought or received (120–160 words). Must include:
-          <ul>
-            <li>Explain why you decided to get this device</li>
-            <li>Describe what feature you like the most about it</li>
-            <li>Invite your friend over to test it out with you</li>
-          </ul>`,
-          essay: `Dear Alex,\n\nHow are things? I hope you're having a smooth week! You won't believe what arrived in the mail yesterday—a brand-new pair of noise-canceling headphones!\n\nI’ve been struggling to concentrate on my revision lately because of constant noise at home, so I decided it was time for an upgrade. They were a bit pricey, but totally worth it.\n\nThe best part is definitely the active noise cancellation. The moment I switch it on, background noise completely vanishes! It feels like sitting in a quiet library.\n\nAre you free this weekend? You should come over and try them out for yourself—we can listen to our favorite playlist together!\n\nCatch you soon,\nBryan`,
-          vocab: ['noise-canceling', 'concentrate', 'totally worth it', 'vanishes', 'catch you soon']
-        },
-        school: {
-          prompt: `<strong>Task Prompt (School Event):</strong><br>Write an email to a friend about a sports day or carnival that was hosted at your school (120–160 words). Must include:
-          <ul>
-            <li>Describe what activity or sport you took part in</li>
-            <li>Explain what made the event so memorable</li>
-            <li>Mention a small issue that occurred during the day</li>
-          </ul>`,
-          essay: `Dear Sam,\n\nHow’s it going? I hope everything is well with you! I’m writing to tell you all about our annual school sports day that happened last Friday.\n\nI entered the 400-meter track event and the 4x100m relay. I was super nervous beforehand, but once the whistle blew, adrenaline took over and our team managed to win second place!\n\nThe highlights were definitely the cheering crowds and the energy throughout the stadium. However, the event got delayed for almost an hour because of a sudden heavy thunderstorm, which was a bit frustrating.\n\nWrite back soon and let me know how your week went!\n\nBest wishes,\nBryan`,
-          vocab: ['annual', 'adrenaline took over', 'highlights', 'frustrating', 'write back soon']
-        },
-        health: {
-          prompt: `<strong>Task Prompt (Fitness Routine):</strong><br>Write an email to a friend about a new sport or healthy habit you started recently (120–160 words). Must include:
-          <ul>
-            <li>Explain why you started this new routine</li>
-            <li>Describe how you felt after trying it for a week</li>
-            <li>Suggest a time when you and your friend can do it together</li>
-          </ul>`,
-          essay: `Dear Jordan,\n\nHow have you been? I hope studies aren't stressing you out too much! I wanted to share a quick update on a new routine I started.\n\nI decided to start morning jogging and bodyweight exercises because I was feeling sluggish sitting at my desk all day. It was tough waking up early at first!\n\nHowever, after a week, I feel far more energetic during the day and sleeping much better at night. It made a huge difference to my focus.\n\nLet's go for a run together this Sunday morning at the park! What do you think?\n\nTake care,\nBryan`,
-          vocab: ['sluggish', 'energetic', 'made a huge difference', 'stressing you out', 'take care']
-        }
-      },
-      article: {
-        tech: {
-          prompt: `<strong>Task Prompt (School Magazine Article):</strong><br>Write an article for your school magazine about whether students should be allowed to use smartphones in class (120–160 words). Must include:
-          <ul>
-            <li>Give arguments in favor of using smartphones for study</li>
-            <li>Explain potential distractions caused by phones</li>
-            <li>Give your clear final conclusion on the topic</li>
-          </ul>`,
-          essay: `<strong>Smartphones in Class: Helper or Distraction?</strong>\n\nTechnology is advancing rapidly, and smartphones have become an essential tool in everyday life. But should they be welcomed inside the classroom?\n\nOn one hand, smartphones provide instant access to educational apps, online dictionaries, and research materials. Students can quickly search for complex terms during study sessions.\n\nOn the other hand, social media notifications and mobile games pose a significant distraction during lectures, reducing students' attention span.\n\nIn conclusion, smartphones should be permitted only under strict teacher supervision for educational tasks, striking a balance between learning and focus.`,
-          vocab: ['advancing rapidly', 'essential tool', 'pose a significant distraction', 'strict supervision', 'striking a balance']
-        },
-        school: {
-          prompt: `<strong>Task Prompt (School Magazine Article):</strong><br>Write an article for your school magazine about how your school can become more environmentally friendly (120–160 words). Must include:
-          <ul>
-            <li>Describe current waste problems around school</li>
-            <li>Suggest solutions like recycling or tree planting</li>
-            <li>Explain how students can contribute daily</li>
-          </ul>`,
-          essay: `<strong>Building a Greener Campus</strong>\n\nEnvironmental sustainability is more vital today than ever before. How can our school community take action?\n\nCurrently, single-use plastic bottles and leftover food waste fill up our school rubbish bins daily. This practice is harming our environment.\n\nTo solve this, the school should install dedicated recycling stations for paper and plastics. Additionally, starting a student-led gardening club to plant native trees would transform our school grounds.\n\nEvery student can contribute by bringing reusable water bottles and avoiding plastic wrap. Together, small changes can make a massive impact!`,
-          vocab: ['vital', 'sustainability', 'single-use', 'student-led', 'make a massive impact']
-        },
-        health: {
-          prompt: `<strong>Task Prompt (School Magazine Article):</strong><br>Write an article for your school magazine giving advice on how students can stay healthy during exam season (120–160 words). Must include:
-          <ul>
-            <li>Mention common unhealthy habits during exams</li>
-            <li>Suggest healthy eating and sleep routines</li>
-            <li>Encourage physical activity for stress relief</li>
-          </ul>`,
-          essay: `<strong>Staying Healthy Under Exam Pressure</strong>\n\nExam season can be extremely demanding, but prioritizing your health is essential for peak academic performance.\n\nMany students fall into the trap of pulling late-night study sessions and consuming unhealthy junk food. This leads to fatigue and poor concentration.\n\nInstead, maintain a balanced diet rich in protein and fruit, and aim for at least eight hours of sleep. Furthermore, taking short breaks for exercise—like brisk walking or cycling—helps clear your mind and relieve stress.\n\nRemember, a healthy mind resides in a healthy body!`,
-          vocab: ['demanding', 'prioritizing', 'pulling late-night sessions', 'fatigue', 'resides']
-        }
-      },
-      report: {
-        tech: {
-          prompt: `<strong>Task Prompt (Formal Report):</strong><br>Write a report for your school principal evaluating the computer lab facilities and recommending improvements (120–160 words).`,
-          essay: `<strong>Report on Computer Lab Facilities</strong>\n\n<strong>Introduction:</strong>\nThe purpose of this report is to evaluate the condition of the school computer lab and propose necessary upgrades.\n\n<strong>Current Situation:</strong>\nWhile the lab contains 30 computers, several key monitors are outdated and internet connections are frequently slow during peak hours, causing delays during computer science lessons.\n\n<strong>Recommendations:</strong>\n1. Upgrade the Wi-Fi bandwidth to ensure seamless online research.\n2. Replace faulty keyboards and outdated monitors.\n\n<strong>Conclusion:</strong>\nImplementing these recommendations will significantly enhance students' digital learning environment.`,
-          vocab: ['evaluate', 'propose necessary upgrades', 'outdated', 'seamless', 'implementing']
-        },
-        school: {
-          prompt: `<strong>Task Prompt (Formal Report):</strong><br>Write a report for your principal suggesting updates to the school canteen menu and dining environment (120–160 words).`,
-          essay: `<strong>Report on Canteen Improvement Options</strong>\n\n<strong>Purpose:</strong>\nThis report assesses student feedback regarding the current school canteen facilities.\n\n<strong>Key Findings:</strong>\nMost students expressed dissatisfaction with the limited healthy food choices. Additionally, long queues during recess prevent many students from finishing meals comfortably.\n\n<strong>Recommendations:</strong>\n- Introduce fresh fruit, salads, and healthier hot meals.\n- Create a secondary serving counter to reduce waiting times.\n\n<strong>Conclusion:</strong>\nThese updates will promote healthy eating habits and improve overall student satisfaction.`,
-          vocab: ['assesses', 'dissatisfaction', 'limited choices', 'introduce', 'overall satisfaction']
-        },
-        health: {
-          prompt: `<strong>Task Prompt (Formal Report):</strong><br>Write a report for your head teacher proposing new sports facilities or gym equipment for the school (120–160 words).`,
-          essay: `<strong>Proposal for School Fitness Facilities</strong>\n\n<strong>Introduction:</strong>\nThis report outlines the benefits of upgrading our school sports facilities for student wellbeing.\n\n<strong>Current State:</strong>\nOur current sports hall lacks modern fitness equipment, limiting student participation in indoor sports during rainy weather.\n\n<strong>Proposed Changes:</strong>\nInvesting in basic gym equipment—such as pull-up bars and stationary bikes—would allow students to exercise consistently regardless of weather.\n\n<strong>Conclusion:</strong>\nUpgrading facilities will encourage physical activity and improve overall student health.`,
-          vocab: ['outlines', 'wellbeing', 'lacks modern equipment', 'consistently', 'participation']
-        }
-      }
-    };
-
-    function generatePracticeSet() {
-      const task = document.getElementById('task-type').value;
-      const topic = document.getElementById('topic-type').value;
-      
-      const item = practiceDB[task][topic];
-      
-      document.getElementById('gen-prompt').innerHTML = item.prompt;
-      document.getElementById('gen-essay').innerText = item.essay;
-      
-      const vocabContainer = document.getElementById('gen-vocab');
-      vocabContainer.innerHTML = '';
-      item.vocab.forEach(word => {
-        const badge = document.createElement('span');
-        badge.className = 'vocab-badge';
-        badge.innerText = word;
-        vocabContainer.appendChild(badge);
-      });
-
-      document.getElementById('output-area').style.display = 'block';
-    }
-  </script>
-
-</body>
-</html>
+I went to the Grand Egyptian Museum last Thursday again, but it was a school trip this time. We arrived at school extra early so our history teacher could give us an overview of what to expect. They also gave us small maps of the museum, which came
