@@ -6,11 +6,12 @@
   <title>IGCSE ESL Notes | Bryan's Vault</title>
   <style>
     :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --border: #30363d;
-      --text: #c9d1d9;
+      --bg-gradient: linear-gradient(135deg, #1b3252 0%, #0e1a2b 100%);
+      --card-bg: rgba(22, 33, 50, 0.85);
+      --border: #2e4361;
+      --text: #e2e8f0;
       --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
     }
 
     * {
@@ -19,11 +20,13 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg-gradient);
+      background-attachment: fixed;
       color: var(--text);
       margin: 0;
       padding: 40px 20px;
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     .container {
@@ -37,34 +40,58 @@
       text-decoration: none;
       font-weight: bold;
       margin-bottom: 20px;
+      transition: transform 0.2s;
     }
 
     .back-btn:hover {
       text-decoration: underline;
+      transform: translateX(-3px);
+    }
+
+    .header-box {
+      margin-bottom: 30px;
     }
 
     h1 {
       color: #fff;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      font-size: 2.2rem;
+      letter-spacing: -0.5px;
     }
 
     .code-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
       color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 600;
+      border: 1px solid var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
     }
 
     .topic-card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 14px;
       padding: 28px;
       margin-top: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .topic-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px -5px var(--accent-glow);
     }
 
     .topic-card h2 {
-      color: var(--accent);
+      color: #fff;
       margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     ul {
@@ -76,22 +103,23 @@
     }
 
     .sample-box {
-      background-color: var(--bg);
+      background-color: rgba(10, 18, 30, 0.9);
       border-left: 4px solid var(--accent);
-      padding: 20px;
-      border-radius: 4px;
+      padding: 22px;
+      border-radius: 6px;
       font-family: Georgia, serif;
       color: var(--text);
       white-space: pre-line;
-      margin: 15px 0;
-      font-size: 1rem;
+      margin: 18px 0;
+      font-size: 1.02rem;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
     }
 
     .prompt-box {
       background-color: rgba(56, 189, 248, 0.08);
       border: 1px dashed var(--accent);
-      padding: 18px;
-      border-radius: 6px;
+      padding: 20px;
+      border-radius: 8px;
       margin-bottom: 20px;
       font-size: 0.98rem;
     }
@@ -100,7 +128,7 @@
       background-color: rgba(34, 197, 94, 0.08);
       border: 1px solid #22c55e;
       padding: 22px;
-      border-radius: 6px;
+      border-radius: 8px;
       margin-top: 20px;
     }
 
@@ -113,20 +141,23 @@
 
     .btn {
       display: inline-block;
-      padding: 12px 22px;
+      padding: 12px 24px;
       background-color: var(--accent);
-      color: #0d1117;
+      color: #08111e;
       text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      font-size: 0.98rem;
       border: none;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
     }
 
     .btn:hover {
-      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.45);
+      opacity: 0.95;
     }
 
     .generator-controls {
@@ -138,14 +169,15 @@
     }
 
     .generator-controls select {
-      background-color: var(--bg);
+      background-color: rgba(10, 18, 30, 0.9);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 6px;
+      padding: 12px 16px;
+      border-radius: 8px;
       font-size: 0.98rem;
       outline: none;
-      min-width: 280px;
+      min-width: 290px;
+      cursor: pointer;
     }
 
     .generator-controls select:focus {
@@ -157,12 +189,14 @@
   <div class="container">
     <a href="index.html" class="back-btn">← Back to Revision Hub</a>
 
-    <h1>✍️ English as a Second Language</h1>
-    <span class="code-badge">Syllabus Code: 0510</span>
+    <div class="header-box">
+      <h1>✍️ English as a Second Language</h1>
+      <span class="code-badge">Syllabus Code: 0510</span>
+    </div>
 
     <!-- Section 1: Writing Tips -->
     <div class="topic-card">
-      <h2>Bryan's Writing Tips & Structure</h2>
+      <h2>💡 Bryan's Writing Tips & Strategy</h2>
       <ul>
         <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Memorise at least 3 advanced vocabulary items and 3 linking phrases to improve fluency.</li>
         <li><strong>Word Count Control:</strong> Keep tightly within the specified range (120–160 or 150–200 words) to reduce chances of grammar errors and keep the answer focused.</li>
@@ -196,7 +230,7 @@
 
     <!-- Section 3: External Links -->
     <div class="topic-card">
-      <h2>More Sample Essays & Practice Materials</h2>
+      <h2>🚀 More Sample Essays & Practice Materials</h2>
       <p>Need extra model answers and practice exercises for exam prep?</p>
       <a href="https://eslkings.com" target="_blank" class="btn">View More Sample Essays on ESL Kings ↗</a>
     </div>
@@ -246,9 +280,9 @@
               <li><strong>Bullet 3 (Small Problem):</strong> Identifies a realistic minor issue (<em>"doesn't have the latest 2024 writing samples"</em>) while explaining why it wasn't a dealbreaker.</li>
             </ul>
           </li>
-        <li>💬 <strong>Mastery of Tone & Register:</strong> Seamlessly balances casual friend-to-friend chit-chat (<em>"You won't believe how much I got"</em>, <em>"always the procrastinator"</em>) with elevated descriptive language.</li>
-        <li>🔤 <strong>Sophisticated Range (Language 8/8):</strong> Leverages strong collocations and advanced vocabulary: <em>"life-saving website"</em>, <em>"top-notch writing samples"</em>, <em>"dramatically"</em>, and <em>"comprehensive"</em>.</li>
-        <li>🔗 <strong>Cohesion & Transitions:</strong> Paragraphs transition smoothly using strong connective devices (<em>"And it's all because..."</em>, <em>"I'm not exaggerating when..."</em>, <em>"Unfortunately..."</em>, <em>"But it's not a big deal..."</em>).</li>
+          <li>💬 <strong>Mastery of Tone & Register:</strong> Seamlessly balances casual friend-to-friend chit-chat (<em>"You won't believe how much I got"</em>, <em>"always the procrastinator"</em>) with elevated descriptive language.</li>
+          <li>🔤 <strong>Sophisticated Range (Language 8/8):</strong> Leverages strong collocations and advanced vocabulary: <em>"life-saving website"</em>, <em>"top-notch writing samples"</em>, <em>"dramatically"</em>, and <em>"comprehensive"</em>.</li>
+          <li>🔗 <strong>Cohesion & Transitions:</strong> Paragraphs transition smoothly using strong connective devices (<em>"And it's all because..."</em>, <em>"I'm not exaggerating when..."</em>, <em>"Unfortunately..."</em>, <em>"But it's not a big deal..."</em>).</li>
         </ul>`
       },
 
@@ -274,7 +308,7 @@
           <li>🎯 <strong>100% Task Fulfilment & Discursive Range:</strong> Perfectly executes a balanced article for a teacher. Evaluates the benefits of a single best friend (Paragraph 2), weighs them against a wide social circle (Paragraph 3), and concludes with a nuanced personal stance (Paragraph 4).</li>
           <li>🔤 <strong>Exceptional Academic Vocabulary:</strong> Demonstrates native-level vocabulary: <em>"indispensable part"</em>, <em>"unarguably"</em>, <em>"authentic and meaningful"</em>, <em>"peace of mind"</em>, <em>"whatever life throws at you"</em>, <em>"diverse backgrounds and perspectives"</em>, <em>"broader social network"</em>, and <em>"tolerant and open-minded"</em>.</li>
           <li>⚙️ <strong>Advanced Punctuation & Complex Grammar:</strong> Showcases advanced syntactic control with correct colon usage (<em>"...peace of mind: whatever life throws at you..."</em>) and semicolon linking (<em>"...no right or wrong answer; what matters is..."</em>).</li>
-          <li>🔗 <strong>Cohesive Devices:</strong> Paragraphs are linked using high-level transition signals (<em>"Unarguably"</em>, <em>"Moreover"</em>, <em>"On the other hand"</u>, <em>"What's more"</em>, <em>"In the end"</em>).</li>
+          <li>🔗 <strong>Cohesive Devices:</strong> Paragraphs are linked using high-level transition signals (<em>"Unarguably"</em>, <em>"Moreover"</em>, <em>"On the other hand"</em>, <em>"What's more"</em>, <em>"In the end"</em>).</li>
         </ul>`
       }
     };
