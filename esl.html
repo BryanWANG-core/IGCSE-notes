@@ -400,4 +400,48 @@
       magazine_review: {
         prompt: `<strong>Task Prompt (Teen Magazine Review):</strong><br>
         You recently bought a copy of a new magazine aimed at teenagers. Review the magazine to post on your school website (120–160 words). Consider given comments regarding price, article length, topic variety, and photos.`,
-        essay: `Teen Time Magazine: Is It Worth the Hype?\n\nWe’ve all heard the recent buzz about Teen Times. It has become the fastest growing and most trending teenage magazine in recent months. I decided to grab my copy to review here and tell you if it’s worth buying.\n\nOn the one hand, Teen Times covers a wide variety of topics, ranging from beauty and fashion to mental wellbeing and social interactions.
+        essay: `Teen Time Magazine: Is It Worth the Hype?\n\nWe’ve all heard the recent buzz about Teen Times. It has become the fastest growing and most trending teenage magazine in recent months. I decided to grab my copy to review here and tell you if it’s worth buying.\n\nOn the one hand, Teen Times covers a wide variety of topics, ranging from beauty and fashion to mental wellbeing and social interactions. This makes it a well-rounded magazine. What’s more, it encompasses fun quizzes, thought-provoking interviews and fascinating visuals that are sure to grip even the most jaded teens.\n\nWhile the scope of subjects is commendable, some crucial topics are only touched upon and lack in-depth analysis. Alongside this, there’s an overemphasis on trends and pop culture, making the magazine prone to getting outdated by new gossip.\n\nOverall, I would highly recommend this magazine to teenagers who want to keep up with the latest trends and stay entertained in an informative way. If you want something more in-depth and detailed though, it’s not for you.`,
+        analysis: `<h4>Detailed Examiner Breakdown (Band 8/9 Full Mark Criteria):</h4>
+        <ul>
+          <li>🎯 <strong>100% Task Fulfilment & Format:</strong> Follows official Cambridge review formatting. Begins with a headline (<em>"Teen Time Magazine: Is It Worth the Hype?"</em>), addresses prompt comments (topic range, photos, depth), and concludes with a definitive target-audience recommendation.</li>
+          <li>🎓 <strong>Formal / Semi-Formal Review Style:</strong> Maintains an engaging yet authoritative stance suitable for a school website review. Uses objective evaluative language rather than simple emotional statements.</li>
+          <li>🔤 <strong>Band 9 Lexical Resource:</strong> Packed with Band 9 vocabulary: <em>"well-rounded magazine"</em>, <em>"thought-provoking interviews"</em>, <em>"fascinating visuals"</em>, <em>"grip even the most jaded teens"</em>, <em>"scope of subjects is commendable"</em>, and <em>"overemphasis on trends"</em>.</li>
+          <li>⚙️ <strong>Complex Structure & Contrast Linkers:</strong> Flawless logical flow built around formal discourse markers: <em>"On the one hand"</em>, <em>"What's more"</em>, <em>"While..."</em>, <em>"Alongside this"</em>, and <em>"Overall"</em>.</li>
+        </ul>`
+      },
+
+      friends_article: {
+        prompt: `<strong>Task Prompt (Friendship Article):</strong><br>
+        In class, you have been talking about whether it is better to have a big group of friends or just one best friend. Write an article for your teacher giving your views (150–200 words).`,
+        essay: `Friends: The More the Better?\n\nFriends are an indispensable part of our lives, and many of us have wondered at one point or another: is it better to have a large group of friends, or just one best friend?\n\nUnarguably, the best aspect of having a best friend is the stronger, authentic, and more meaningful relationship you’ll have, which allows you to trust your friend even with the deepest of your secrets. Moreover, having a best friend gives you peace of mind: whatever life throws at you, you’ll find someone ready to help and support you to get back up.\n\nOn the other hand, the diverse backgrounds and perspectives of a broader social network allow you to grow as a person and learn from many people’s experiences. This can make you more tolerant and open-minded. What’s more, you’ll always have someone to hang around with and more opportunities to socialize.\n\nIn the end, I believe that the best option is the one that fits your personality and preferences. There’s no right or wrong answer; what matters is having friendships that bring happiness and last for a lifetime!`,
+        analysis: `<h4>Detailed Examiner Breakdown (Band 8/9 Full Mark Criteria):</h4>
+        <ul>
+          <li>🎯 <strong>100% Task Fulfilment & Discursive Range:</strong> Perfectly executes a balanced article for a teacher. Evaluates the benefits of a single best friend (Paragraph 2), weighs them against a wide social circle (Paragraph 3), and concludes with a nuanced personal stance (Paragraph 4).</li>
+          <li>🔤 <strong>Exceptional Academic Vocabulary:</strong> Demonstrates native-level vocabulary: <em>"indispensable part"</em>, <em>"unarguably"</em>, <em>"authentic and meaningful"</em>, <em>"peace of mind"</em>, <em>"whatever life throws at you"</em>, <em>"diverse backgrounds and perspectives"</em>, <em>"broader social network"</em>, and <em>"tolerant and open-minded"</em>.</li>
+          <li>⚙️ <strong>Advanced Punctuation & Complex Grammar:</strong> Showcases advanced syntactic control with correct colon usage (<em>"...peace of mind: whatever life throws at you..."</em>) and semicolon linking (<em>"...no right or wrong answer; what matters is..."</em>).</li>
+          <li>🔗 <strong>Cohesive Devices:</strong> Paragraphs are linked using high-level transition signals (<em>"Unarguably"</em>, <em>"Moreover"</em>, <em>"On the other hand"</em>, <em>"What's more"</em>, <em>"In the end"</em>).</li>
+        </ul>`
+      }
+    };
+
+    function loadSelectedEssay() {
+      const select = document.getElementById('task-select');
+      const chosenKey = select.value;
+      const item = essayVault[chosenKey];
+
+      const outputArea = document.getElementById('output-area');
+      const promptBox = document.getElementById('display-prompt');
+      const essayBox = document.getElementById('display-essay');
+      const analysisBox = document.getElementById('display-analysis');
+
+      if (!item) return;
+
+      promptBox.innerHTML = item.prompt;
+      essayBox.textContent = item.essay;
+      analysisBox.innerHTML = item.analysis;
+
+      outputArea.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
