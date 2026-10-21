@@ -21,59 +21,67 @@
       background-attachment: fixed;
       color: var(--text);
       margin: 0;
-      padding: 40px 20px;
+      padding: 50px 20px;
       line-height: 1.6;
       min-height: 100vh;
     }
 
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
     }
 
     h1 {
       color: #ffffff;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     .subtitle {
       color: #94a3b8;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
+    /* Expanded Container Width for PC Displays */
     .container {
-      max-width: 850px;
+      max-width: 1150px;
       margin: 0 auto;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
 
     .card {
       background-color: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       border-color: var(--card-accent);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
     }
 
     .card h3 {
       margin-top: 0;
       color: #ffffff;
+      font-size: 1.35rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
     }
 
     .tag {
@@ -81,45 +89,59 @@
       background-color: rgba(255, 255, 255, 0.08);
       color: var(--card-accent);
       border: 1px solid var(--card-accent);
-      font-size: 0.8rem;
-      padding: 2px 8px;
+      font-size: 0.82rem;
+      padding: 3px 10px;
       border-radius: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-weight: 600;
     }
 
+    /* Larger, Fully Opaque Buttons */
     .btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 8px 14px;
-      background-color: var(--card-accent);
-      color: #0f172a;
+      display: block;
+      margin-top: 14px;
+      padding: 12px 18px;
+      background-color: var(--card-accent); /* Fully Opaque Solid Color */
+      color: #0f172a; /* Deep contrast text for maximum readability */
       text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 8px;
+      font-size: 1rem;
       text-align: center;
+      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
-    /* Computer Science White Button Text Fix */
+    /* Computer Science White Button Fix */
     .card[style*="#f8fafc"] .btn {
       color: #0f172a;
     }
 
     .btn:hover {
-      opacity: 0.9;
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
     }
 
     footer {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 60px;
       color: #cbd5e1;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     footer a {
       color: #38bdf8;
       text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -171,44 +193,3 @@
           <p>Forces, energy, waves, electricity, and Paper 6 practical tips.</p>
         </div>
         <a href="physics.html" class="btn">View Notes</a>
-      </div>
-
-      <!-- Chemistry (Red) -->
-      <div class="card" style="--card-accent: #ef4444;">
-        <div>
-          <span class="tag">0620</span>
-          <h3>🧪 Chemistry</h3>
-          <p>Key formulas, definition lists, and practical paper (Paper 6) tips.</p>
-        </div>
-        <a href="chemistry.html" class="btn">View Notes</a>
-      </div>
-
-      <!-- Computer Science (White) -->
-      <div class="card" style="--card-accent: #f8fafc;">
-        <div>
-          <span class="tag">0478 / 0984</span>
-          <h3>💻 Computer Science</h3>
-          <p>Pseudocode syntax guides, logic gates, and hardware fundamentals.</p>
-        </div>
-        <a href="cs.html" class="btn">View Notes</a>
-      </div>
-
-      <!-- ESL (Light Blue) -->
-      <div class="card" style="--card-accent: #38bdf8;">
-        <div>
-          <span class="tag">0510 / 0511</span>
-          <h3>✍️ ESL</h3>
-          <p>Read, write, listen and speak ALL IN ENGLISH.</p>
-        </div>
-        <a href="esl.html" class="btn">View Notes</a>
-      </div>
-
-    </div>
-  </div>
-
-  <footer>
-    <p>Maintained by <a href="https://github.com/BryanWANG-core">Bryan Wang</a> | Pre-U MUFY Journey</p>
-  </footer>
-
-</body>
-</html>
