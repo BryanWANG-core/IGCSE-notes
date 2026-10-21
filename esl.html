@@ -13,6 +13,10 @@
       --accent: #38bdf8;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
@@ -129,6 +133,7 @@
       gap: 15px;
       flex-wrap: wrap;
       margin-bottom: 20px;
+      align-items: center;
     }
 
     .generator-controls select {
@@ -145,10 +150,13 @@
     .generator-controls select:focus {
       border-color: var(--accent);
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
-
   <div class="container">
     <a href="index.html" class="back-btn">← Back to Revision Hub</a>
 
@@ -159,8 +167,8 @@
     <div class="topic-card">
       <h2>Bryan's Writing Tips & Structure</h2>
       <ul>
-        <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Memorise at least 3 advanced vocabulary words, 3 advanced linking phrases, and 3 idioms.</li>
-        <li><strong>Word Count Control:</strong> Keep tightly within the specified range (120–160 or 150–200 words) to reduce chances of grammar errors, etc.</li>
+        <li><strong>Informal Email Strategy:</strong> Always address all three prompt bullet points in separate paragraphs. Memorise at least 3 advanced vocabulary items and 3 linking phrases to improve fluency.</li>
+        <li><strong>Word Count Control:</strong> Keep tightly within the specified range (120–160 or 150–200 words) to reduce chances of grammar errors and keep the answer focused.</li>
       </ul>
     </div>
 
@@ -177,11 +185,11 @@
           <option value="friends_article">Article: Friend Groups vs Best Friend</option>
         </select>
 
-        <button class="btn" onclick="loadSelectedEssay()">View Question & Essay</button>
+        <button class="btn" type="button" onclick="loadSelectedEssay()">View Question & Essay</button>
       </div>
 
       <!-- Content Output Area -->
-      <div id="output-area" style="display: none;">
+      <div id="output-area" class="hidden">
         <div class="prompt-box" id="display-prompt"></div>
         <h3>Model Answer:</h3>
         <div class="sample-box" id="display-essay"></div>
@@ -195,74 +203,144 @@
       <p>Need extra model answers and practice exercises for exam prep?</p>
       <a href="https://eslkings.com" target="_blank" class="btn">View More Sample Essays on ESL Kings ↗</a>
     </div>
-
   </div>
 
   <script>
     const essayVault = {
       sports_volunteer: {
-        prompt: `<strong>Task Prompt (Sports Event Helper):</strong><br>
-        You have decided to help at a sports event taking place in your town next month. Write an email to a friend about this (120–160 words). Must include:
-        <ul>
-          <li>Describe the sports event that you are going to help at</li>
-          <li>Say why you decided to help at the sports event</li>
-          <li>Explain what you will be doing at the sports event</li>
-        </ul>`,
-        essay: `Hey Mariam,\n\nI hope you’ve been doing well. I’m so sorry for not writing sooner. Guess what!\n\nI found out our town is holding a 20km marathon to raise funds for our local charities! They were searching for volunteers to help around, and I stepped up. It’ll be taking place around the whole town and tons of local athletes are participating!\n\nYou know how inactive I am—I sit around all day and it’s taking a toll on my body. So, when I heard about it, I knew it was exactly what I needed to get moving. Plus, my mom is always nagging me about getting my face off the phone and making some friends. Hopefully, I’ll meet some nice people my age.\n\nI’ve received my role last Friday, and I’ll be helping with setting up aid stations. I’ll also be handing out refreshments to the athletes while cheering them on. I’m already feeling all giddy just thinking about seeing all the excitement and the competitors’ spirits up close!\n\nAnyway, I’ll write again soon. Stay blessed!\n\nBRYAN`,
-        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
-        <ul>
-          <li>✅ <strong>Bullet Point Coverage:</strong> Clearly details the 20km town marathon, personal motivations (getting active & socializing), and assigned responsibilities (aid station setup & handing out refreshments).</li>
-          <li>✅ <strong>Natural Tone & Vocabulary:</strong> Uses effective colloquial expressions like <em>stepped up</em>, <em>taking a toll on my body</em>, and <em>feeling all giddy</em>.</li>
-        </ul>`
+        prompt: `
+          <strong>Task Prompt (Sports Event Helper):</strong><br>
+          You have decided to help at a sports event taking place in your town next month. Write an email to a friend about this (120–160 words). Must include:
+          <ul>
+            <li>Describe the sports event that you are going to help at</li>
+            <li>Say why you decided to help at the sports event</li>
+            <li>Explain what you will be doing at the sports event</li>
+          </ul>
+        `,
+        essay: `Hey Mariam,
+
+I hope you’ve been doing well. I’m so sorry for not writing sooner. Guess what!
+
+I found out our town is holding a 20km marathon to raise funds for our local hospital, and I’ve decided to volunteer as a helper. The event is taking place next month, and I’m really excited because it combines fitness, teamwork, and community spirit.
+
+I chose to help because I wanted to do something meaningful and get involved with my town. I also thought it would be a great opportunity to support a good cause while meeting new people. On top of that, I’ve been trying to become more active lately, so this seemed like the perfect way to stay motivated.
+
+When the day arrives, I’ll be checking in runners, directing people to the correct starting points, and handing out water at the aid station. I’m sure it’ll be tiring, but I think it will also be a lot of fun and very rewarding.
+
+Anyway, I’d love to hear what you’ve been up to lately. Let’s catch up soon!`,
+
+        analysis: `
+          <h4>Why This Answer Scores Full Marks:</h4>
+          <ul>
+            <li>✅ <strong>Bullet Point Coverage:</strong> Clearly addresses the event description, personal motivation, and volunteering tasks.</li>
+            <li>✅ <strong>Natural Tone & Vocabulary:</strong> Uses informal but effective phrases such as <em>Guess what!</em>, <em>community spirit</em>, and <em>very rewarding</em>.</li>
+            <li>✅ <strong>Good Structure:</strong> Organises the email into clear paragraphs, making it easy to read and follow.</li>
+          </ul>
+        `
       },
+
       website_recommend: {
-        prompt: `<strong>Task Prompt (Schoolwork Website):</strong><br>
-        You have recently found a website which helped you with your schoolwork, and you want to tell your friend about it. Write an email to a friend telling them about the website (150–200 words). Must include:
-        <ul>
-          <li>Tell your friend how you found the website</li>
-          <li>Describe how the website helped with your schoolwork</li>
-          <li>Mention a small problem you had with the website</li>
-        </ul>`,
-        essay: `Hey Noah,\n\nHow’re things? It’s been a while since we last talked. You won’t believe how much I got in my English mock!\n\nI got 145/150, which is an A*! And it’s all because of this life-saving website called ESL Kings. I came across it while searching for resources to study from, just two weeks ahead. You know me — always the procrastinator.\n\nI’m not exaggerating when I say it’s the best website I’ve found till now. Their top-notch writing samples have improved my vocabulary and sentence structures dramatically. The notes have also been a great help — comprehensive and easy to understand. Trust me, you should check it out, and you’ll thank me later!\n\nUnfortunately, it doesn’t have the latest 2024 writing samples to match the new syllabus. But it’s not a big deal, since the only difference is the word count and essentially everything else is the same.\n\nI must go now. Let me know how your diet has been going so far!\n\nWith love,\n\nBRYAN`,
-        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
-        <ul>
-          <li>✅ <strong>Bullet Point Coverage:</strong> Explains finding it via search 2 weeks prior, details score improvement (145/150 A*), and highlights the lack of updated syllabus samples as a minor issue.</li>
-          <li>✅ <strong>Sophisticated Structure:</strong> Features varied vocabulary such as <em>life-saving</em>, <em>top-notch</em>, and <em>comprehensive</em>.</li>
-        </ul>`
+        prompt: `
+          <strong>Task Prompt (Schoolwork Website):</strong><br>
+          You have recently found a website which helped you with your schoolwork, and you want to tell your friend about it. Write an email to a friend telling them about the website (150–200 words).
+          <ul>
+            <li>Tell your friend how you found the website</li>
+            <li>Describe how the website helped with your schoolwork</li>
+            <li>Mention a small problem you had with the website</li>
+          </ul>
+        `,
+        essay: `Hey Noah,
+
+How’re things? It’s been a while since we last talked. You won’t believe how much I improved in my English mock!
+
+I got 145/150, which is an A*! And it’s all because I found this amazing website two weeks ago. I was searching for grammar explanations and revision notes when I stumbled across it. At first, I thought it looked a bit basic, but once I clicked around, I realised it was incredibly useful.
+
+The website helped me with my schoolwork in so many ways. It had clear explanations, short video lessons, and practice questions with answers, which made difficult topics much easier to understand. I used it to revise essay structure, vocabulary, and punctuation, and my confidence improved a lot.
+
+The only small problem was that some of the sample essays were slightly out of date, so I still had to check the school syllabus. Even so, I think it’s definitely worth using.
+
+You should try it out too — it’s basically a lifesaver for revision!`,
+
+        analysis: `
+          <h4>Why This Answer Scores Full Marks:</h4>
+          <ul>
+            <li>✅ <strong>Bullet Point Coverage:</strong> Explains discovery, improvement to schoolwork, and a small issue with the site.</li>
+            <li>✅ <strong>Sophisticated Structure:</strong> Uses clear topic sentences and varied linking phrases to maintain coherence.</li>
+            <li>✅ <strong>Strong Vocabulary:</strong> Includes expressions like <em>stumbled across</em>, <em>incredibly useful</em>, and <em>lifesaver for revision</em>.</li>
+          </ul>
+        `
       },
+
       magazine_review: {
-        prompt: `<strong>Task Prompt (Teen Magazine Review):</strong><br>
-        You recently bought a copy of a new magazine aimed at teenagers. Review the magazine to post on your school website (120–160 words). Consider given comments regarding price, article length, topic variety, and photos.`,
-        essay: `Teen Time Magazine: Is It Worth the Hype?\n\nWe’ve all heard the recent buzz about Teen Times. It has become the fastest growing and most trending teenage magazine in recent months. I decided to grab my copy to review here and tell you if it’s worth buying.\n\nOn the one hand, Teen Times covers a wide variety of topics, ranging from beauty and fashion to mental wellbeing and social interactions. This makes it a well-rounded magazine. What’s more, it encompasses fun quizzes, thought-provoking interviews and fascinating visuals that are sure to grip even the most jaded teens.\n\nWhile the scope of subjects is commendable, some crucial topics are only touched upon and lack in-depth analysis. Alongside this, there’s an overemphasis on trends and pop culture, making the magazine prone to getting outdated by new gossip.\n\nOverall, I would highly recommend this magazine to teenagers who want to keep up with the latest trends and stay entertained in an informative way. If you want something more in-depth and detailed though, it’s not for you.`,
-        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
-        <ul>
-          <li>✅ <strong>Balanced Structure:</strong> Organizes content into clear sections: introductory hook, positive features, critical limitations, and a final recommendation.</li>
-          <li>✅ <strong>Advanced Vocabulary:</strong> Uses phraseology like <em>thought-provoking</em>, <em>jaded teens</em>, <em>commendable</em>, and <em>overemphasis</em>.</li>
-        </ul>`
+        prompt: `
+          <strong>Task Prompt (Teen Magazine Review):</strong><br>
+          You recently bought a copy of a new magazine aimed at teenagers. Review the magazine to post on your school website (120–160 words). Consider given comments regarding price, article length, and overall interest.
+        `,
+        essay: `Teen Time Magazine: Is It Worth the Hype?
+
+We’ve all heard the recent buzz about Teen Time. It has become one of the most popular teenage magazines in recent months, but is it really worth buying?
+
+The magazine has a lot going for it. The design is bright, modern, and full of eye-catching photos, which immediately appeal to younger readers. The articles are varied and cover topics such as fashion, music, wellbeing, and school life, making it feel engaging and relevant. The price is also reasonable for a magazine of this quality.
+
+However, there are a few drawbacks. Some of the features are quite short, so they do not go into enough detail, and a couple of the topics felt a little repetitive. I also think the magazine could include more interviews with real students, as this would make it feel more authentic.
+
+Overall, I would recommend it to teens who want a fun and stylish read, but it is not perfect. It is enjoyable, colourful, and easy to read, but not without flaws.`,
+
+        analysis: `
+          <h4>Why This Answer Scores Full Marks:</h4>
+          <ul>
+            <li>✅ <strong>Balanced Structure:</strong> Opens with a hook, explores positives and negatives, and ends with a clear recommendation.</li>
+            <li>✅ <strong>Advanced Vocabulary:</strong> Uses phrases like <em>eye-catching</em>, <em>relevant</em>, and <em>authentic</em>.</li>
+            <li>✅ <strong>Good Summary:</strong> Concludes with a fair judgement that reflects the magazine’s strengths and weaknesses.</li>
+          </ul>
+        `
       },
+
       friends_article: {
-        prompt: `<strong>Task Prompt (Friendship Article):</strong><br>
-        In class, you have been talking about whether it is better to have a big group of friends or just one best friend. Write an article for your teacher giving your views (150–200 words).`,
-        essay: `Friends: The More the Better?\n\nFriends are an indispensable part of our lives, and many of us have wondered at one point or another: is it better to have a large group of friends, or just one best friend?\n\nUnarguably, the best aspect of having a best friend is the stronger, authentic, and more meaningful relationship you’ll have, which allows you to trust your friend even with the deepest of your secrets. Moreover, having a best friend gives you peace of mind: whatever life throws at you, you’ll find someone ready to help and support you to get back up.\n\nOn the other hand, the diverse backgrounds and perspectives of a broader social network allow you to grow as a person and learn from many people’s experiences. This can make you more tolerant and open-minded. What’s more, you’ll always have someone to hang around with and more opportunities to socialize.\n\nIn the end, I believe that the best option is the one that fits your personality and preferences. There’s no right or wrong answer; what matters is having friendships that bring happiness and last for a lifetime!`,
-        analysis: `<h4>Why This Answer Scores Full Marks:</h4>
-        <ul>
-          <li>✅ <strong>Cohesive Argumentation:</strong> Balances individual deep connections against wider social circles before concluding thoughtfully.</li>
-          <li>✅ <strong>Rich Linkers & Range:</strong> Uses connectors like <em>Unarguably</em>, <em>On the other hand</em>, and <em>In the end</em> alongside elevated language (<em>indispensable</em>, <em>diverse perspectives</em>).</li>
-        </ul>`
+        prompt: `
+          <strong>Task Prompt (Friendship Article):</strong><br>
+          In class, you have been talking about whether it is better to have a big group of friends or just one best friend. Write an article for your teacher giving your views (150–200 words).
+        `,
+        essay: `Friends: The More the Better?
+
+Friends are an essential part of our lives, and many of us have wondered whether it is better to have a large group of friends or just one best friend. In my opinion, having a wide circle of friends is more beneficial.
+
+A big group of friends offers variety. You can talk to different people about different experiences, and this helps you learn more about the world. Some friends may be sporty, while others are artistic or academic. This diversity can make life more interesting and exciting. I also think a larger group gives you more chances to socialise, especially during busy school weeks.
+
+That said, a best friend is still important. They are the person who understands you deeply and is always there in difficult times. However, I believe one best friend is not enough on its own, because a strong support network is more valuable than a single relationship.
+
+In conclusion, while a best friend is special, having many friends creates a more balanced and fulfilling life.`,
+
+        analysis: `
+          <h4>Why This Answer Scores Full Marks:</h4>
+          <ul>
+            <li>✅ <strong>Clear Opinion:</strong> The writer gives a direct viewpoint and supports it effectively.</li>
+            <li>✅ <strong>Well-Developed Ideas:</strong> Discusses both sides, then explains why a larger group is better.</li>
+            <li>✅ <strong>Effective Conclusion:</strong> The final paragraph sums up the argument in a focused way.</li>
+          </ul>
+        `
       }
     };
 
     function loadSelectedEssay() {
-      const selectedKey = document.getElementById('task-select').value;
-      const item = essayVault[selectedKey];
+      const select = document.getElementById('task-select');
+      const chosenKey = select.value;
+      const selectedItem = essayVault[chosenKey];
 
-      document.getElementById('display-prompt').innerHTML = item.prompt;
-      document.getElementById('display-essay').innerText = item.essay;
-      document.getElementById('display-analysis').innerHTML = item.analysis;
+      const outputArea = document.getElementById('output-area');
+      const promptBox = document.getElementById('display-prompt');
+      const essayBox = document.getElementById('display-essay');
+      const analysisBox = document.getElementById('display-analysis');
 
-      document.getElementById('output-area').style.display = 'block';
+      if (!selectedItem) return;
+
+      promptBox.innerHTML = selectedItem.prompt;
+      essayBox.textContent = selectedItem.essay;
+      analysisBox.innerHTML = selectedItem.analysis;
+
+      outputArea.classList.remove('hidden');
+      outputArea.style.display = 'block';
     }
   </script>
-
 </body>
 </html>
