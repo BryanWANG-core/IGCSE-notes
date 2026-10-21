@@ -200,31 +200,28 @@ Lots of love,
       </ul>
     </div>
 
-    <!-- Section 3: AI Question & Sample Essay Generator -->
+    <!-- Section 3: Dynamic AI Practice Generator -->
     <div class="topic-card">
-      <h2>🤖 Practice Prompt & Sample Essay Generator</h2>
-      <p>Select a task type and topic to generate a dynamic IGCSE ESL prompt along with a Band 8/9 model response.</p>
+      <h2>🤖 Dynamic Sample Essay Generator</h2>
+      <p>Select a task type and topic to generate a dynamic, high-scoring IGCSE ESL prompt and unique model answer every time.</p>
       
       <div class="generator-controls">
         <select id="task-type">
           <option value="email">Informal Email (120–160 words)</option>
           <option value="article">School Magazine Article (120–160 words)</option>
           <option value="report">Formal Report (120–160 words)</option>
-          <option value="review">Review (120–160 words)</option>
         </select>
 
         <select id="topic-type">
           <option value="tech">Technology & Social Media</option>
           <option value="school">School & Environment</option>
           <option value="health">Health & Sports</option>
-          <option value="travel">Travel & Holidays</option>
-          <option value="community">Local Community & Events</option>
         </select>
 
-        <button class="btn" onclick="generatePracticeSet()">⚡ Generate Prompt & Essay</button>
+        <button class="btn" onclick="generateDynamicEssay()">⚡ Generate Prompt & Essay</button>
       </div>
 
-      <!-- Generated Content Output Area -->
+      <!-- Output Area -->
       <div id="output-area" style="display: none;">
         <div class="prompt-box" id="gen-prompt"></div>
         <h3>Model Response:</h3>
@@ -244,14 +241,179 @@ Lots of love,
   </div>
 
   <script>
-    // Safe client-side database for practice generation
-    const practiceDB = {
+    const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+    const dynamicDB = {
       email: {
         tech: {
-          prompt: `<strong>Task Prompt (New Tech Device):</strong><br>Write an email to a friend telling them about a new electronic device you recently bought or received (120–160 words). Must include:
-          <ul>
-            <li>Explain why you decided to get this device</li>
-            <li>Describe what feature you like the most about it</li>
-            <li>Invite your friend over to test it out with you</li>
-          </ul>`,
-          essay: `Dear Alex,\n\nHow are things? I hope you're having a smooth week! You won't believe
+          openings: [
+            "How are things? I hope you're having a smooth week! You won't believe what arrived in the mail yesterday—a brand-new smartwatch!",
+            "How's it going? Hope exam prep isn't stressing you out too much. Guess what? I finally bought that wireless noise-canceling headset!",
+            "Hope you're doing great! I couldn't wait to write and tell you about the gaming laptop I saved up for!"
+          ],
+          reasons: [
+            "I’ve been struggling to concentrate on my revision lately because of noisy surroundings, so I decided it was time for a serious upgrade.",
+            "My old setup kept crashing during online classes, which was extremely frustrating, so my parents agreed to help me get a reliable replacement.",
+            "I needed a lightweight, portable device for my computer science projects, so I spent weeks comparing models before picking this one."
+          ],
+          features: [
+            "The best part is definitely the battery life—it lasts for three full days without charging! Plus, the display is crisp and vibrant.",
+            "The active noise cancellation is absolutely mind-blowing. The moment I switch it on, background noise completely vanishes like magic.",
+            "What impresses me most is how blazingly fast it operates. Apps open instantly, which saves me tons of time when studying."
+          ],
+          invites: [
+            "Are you free this weekend? You should come over and try it out for yourself—we can test it together!",
+            "Let me know when you're free to hang out. I'd love to show you how it works in person!",
+            "Drop by my house on Sunday if you have time! I'm sure you'll love using it too."
+          ],
+          closings: ["Catch you soon,\nBryan", "Write back when you can,\nBryan", "Talk soon,\nBryan"],
+          vocab: ["noise-canceling", "blazingly fast", "mind-blowing", "concentrate", "upgrade"]
+        },
+        school: {
+          openings: [
+            "How’s everything going? I wanted to share some exciting news about our school's annual science fair that happened last Friday!",
+            "Hope you're having a great week! I'm writing to tell you all about our school's recent sports competition.",
+            "How have you been? You missed an incredible event at school yesterday—our annual charity carnival!"
+          ],
+          reasons: [
+            "I entered the coding competition with two classmates. We spent three full weeks building a mini prototype, which was exhausting but fun.",
+            "I decided to run the 400m track event and the 4x100m relay. I was super nervous beforehand, but adrenaline took over once the race started.",
+            "Our class set up a food stall selling homemade baked goods to raise funds for the local animal shelter."
+          ],
+          features: [
+            "The highlights were definitely the energetic crowds and cheering atmosphere throughout the venue. We even managed to secure second place overall!",
+            "Seeing everyone support each other was amazing. Plus, the judges praised our project's creativity, which made us really proud.",
+            "The overall vibe was fantastic, and everyone was in high spirits throughout the day."
+          ],
+          invites: [
+            "However, the event got delayed for an hour because of a sudden thunderstorm, which was a bit disappointing.",
+            "Unfortunately, the sound system broke down halfway through, causing a minor delay, but we still enjoyed ourselves.",
+            "The only downside was running out of food early due to the huge crowd, but it was still a massive success."
+          ],
+          closings: ["Best wishes,\nBryan", "Write back soon,\nBryan", "Warm regards,\nBryan"],
+          vocab: ["annual", "adrenaline took over", "high spirits", "disappointing", "massive success"]
+        },
+        health: {
+          openings: [
+            "How have you been? I wanted to share a quick update on a new healthy habit I started recently.",
+            "Hope studies aren't wearing you out! Guess what? I decided to revamp my daily routine this week.",
+            "How's life? I'm writing to fill you in on a positive lifestyle change I've been trying out."
+          ],
+          reasons: [
+            "I realized I was feeling sluggish sitting at my desk studying for hours, so I started doing morning jogs and bodyweight exercises.",
+            "After noticing how tired I felt during revision, I decided to fix my sleep schedule and eat nutrient-dense meals like oats and fresh fruit.",
+            "I wanted to build better stamina for sports day, so I committed to a structured workout routine every evening."
+          ],
+          features: [
+            "After just one week, I feel far more energetic during the day and sleep much deeper at night. It made a noticeable difference to my focus.",
+            "My mood has improved dramatically, and I no longer feel drained during long study sessions.",
+            "It felt tough getting up early initially, but the boost in mental clarity throughout the day makes it totally worth it."
+          ],
+          invites: [
+            "Let's go for a jog together at the park this Sunday morning! What do you think?",
+            "Why don't you join me for a session this weekend? It'll be a great way to de-stress!",
+            "You should definitely try it out with me sometime this week!"
+          ],
+          closings: ["Take care,\nBryan", "See you soon,\nBryan", "Cheers,\nBryan"],
+          vocab: ["sluggish", "nutrient-dense", "stamina", "noticeable difference", "mental clarity"]
+        }
+      },
+      article: {
+        tech: {
+          titles: ["Smartphones in Class: Tool or Distraction?", "The Digital Classroom: A Modern Dilemma", "Technology in Education: Finding the Balance"],
+          intros: ["Technology is advancing rapidly, and smartphones have become integral to everyday life. But should they be welcomed inside high school classrooms?"],
+          pros: ["On one hand, smartphones grant instant access to educational resources, online dictionaries, and research materials during group activities."],
+          cons: ["On the other hand, social media alerts and mobile games pose a significant distraction, frequently reducing students' attention spans."],
+          concls: ["In conclusion, mobile devices should be permitted only under strict teacher supervision for specific learning tasks, striking a healthy balance between innovation and focus."],
+          vocab: ["advancing rapidly", "integral", "pose a significant distraction", "strict supervision", "striking a balance"]
+        },
+        school: {
+          titles: ["Building a Greener Campus", "Sustainability at School", "Creating an Eco-Friendly Community"],
+          intros: ["Environmental sustainability is more vital today than ever. How can our school community take meaningful action?"],
+          pros: ["Currently, single-use plastic bottles and discarded paper clutter our rubbish bins daily, which harms our environment."],
+          cons: ["To combat this, the school should install dedicated recycling stations and launch a student-led tree planting initiative."],
+          concls: ["By encouraging reusable water bottles and proper waste sorting, every student can contribute to a cleaner, greener campus."],
+          vocab: ["sustainability", "meaningful action", "single-use", "student-led", "contribute"]
+        },
+        health: {
+          titles: ["Staying Healthy Under Exam Pressure", "Prioritizing Wellbeing During Revision", "Peak Health, Peak Grades"],
+          intros: ["Exam season can be extremely demanding, but prioritizing physical wellbeing is essential for academic performance."],
+          pros: ["Many students pull late-night study sessions and consume unhealthy junk food, resulting in fatigue and poor concentration."],
+          cons: ["Instead, maintaining a balanced diet, drinking plenty of water, and ensuring eight hours of sleep dramatically improves focus."],
+          concls: ["Additionally, taking short exercise breaks—such as brisk walking—clears the mind and alleviates stress naturally."],
+          vocab: ["demanding", "prioritizing", "fatigue", "dramatically improves", "alleviates stress"]
+        }
+      },
+      report: {
+        tech: {
+          titles: ["Report on Computer Lab Upgrades", "Evaluation of School IT Facilities"],
+          intros: ["Purpose:\nThe purpose of this report is to evaluate the current condition of the computer lab and propose necessary technical upgrades."],
+          pros: ["Current Situation:\nWhile the lab houses 30 desktop computers, several monitors are outdated and internet speeds slow down significantly during peak hours."],
+          cons: ["Recommendations:\n1. Upgrade network bandwidth to ensure seamless browsing.\n2. Replace faulty peripherals including keyboards and mice."],
+          concls: ["Conclusion:\nImplementing these measures will enhance digital learning for all students."],
+          vocab: ["evaluate", "necessary upgrades", "outdated", "seamless", "implementing"]
+        },
+        school: {
+          titles: ["Report on Canteen Enhancements", "Assessment of School Dining Facilities"],
+          intros: ["Purpose:\nThis report assesses student feedback regarding current canteen menu options and seating facilities."],
+          pros: ["Key Findings:\nSurveys indicate widespread dissatisfaction with limited healthy food selections and long queue times during recess."],
+          cons: ["Recommendations:\n- Introduce fresh fruits, salads, and nutritious warm meals.\n- Set up an additional express counter to reduce waiting times."],
+          concls: ["Conclusion:\nThese improvements will promote healthier eating habits and improve overall satisfaction."],
+          vocab: ["assesses", "widespread dissatisfaction", "introduce", "nutritious", "overall satisfaction"]
+        },
+        health: {
+          titles: ["Proposal for Fitness Equipment", "Report on Sports Hall Improvements"],
+          intros: ["Purpose:\nThis report outlines the potential benefits of upgrading indoor sports hall equipment for student health."],
+          pros: ["Current State:\nOur current sports hall lacks modern exercise machinery, restricting student sports activities during wet weather."],
+          cons: ["Proposed Solutions:\nInvesting in fundamental equipment like exercise bikes and pull-up stations would allow consistent physical training."],
+          concls: ["Conclusion:\nUpgrading facilities will foster active lifestyles across all year groups."],
+          vocab: ["outlines", "potential benefits", "restricting", "consistent", "foster active lifestyles"]
+        }
+      }
+    };
+
+    function generateDynamicEssay() {
+      const task = document.getElementById('task-type').value;
+      const topic = document.getElementById('topic-type').value;
+      const item = dynamicDB[task][topic];
+
+      let generatedText = "";
+      let promptHTML = "";
+
+      if (task === 'email') {
+        promptHTML = `<strong>Task Prompt (Informal Email - ${topic.toUpperCase()}):</strong><br>Write an email to a friend about a recent development regarding ${topic} (120–160 words). Must include:
+        <ul>
+          <li>Explain why you took action or made a choice regarding this topic</li>
+          <li>Describe what you enjoyed or liked most about it</li>
+          <li>Suggest a time or plan to meet up with your friend</li>
+        </ul>`;
+
+        generatedText = `${getRandom(item.openings)}\n\n${getRandom(item.reasons)}\n\n${getRandom(item.features)} ${getRandom(item.invites)}\n\n${getRandom(item.closings)}`;
+      } else if (task === 'article') {
+        const title = getRandom(item.titles);
+        promptHTML = `<strong>Task Prompt (School Magazine Article):</strong><br>Write an article for your school magazine about ${title} (120–160 words). Include arguments for both sides and a clear conclusion.`;
+        generatedText = `<strong>${title}</strong>\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
+      } else if (task === 'report') {
+        const title = getRandom(item.titles);
+        promptHTML = `<strong>Task Prompt (Formal Report):</strong><br>Write a formal report for your school authority on ${title} (120–160 words). Include findings and recommendations.`;
+        generatedText = `<strong>${title}</strong>\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
+      }
+
+      document.getElementById('gen-prompt').innerHTML = promptHTML;
+      document.getElementById('gen-essay').innerText = generatedText;
+
+      const vocabContainer = document.getElementById('gen-vocab');
+      vocabContainer.innerHTML = '';
+      item.vocab.forEach(word => {
+        const badge = document.createElement('span');
+        badge.className = 'vocab-badge';
+        badge.innerText = word;
+        vocabContainer.appendChild(badge);
+      });
+
+      document.getElementById('output-area').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
