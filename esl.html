@@ -10,7 +10,7 @@
       --card-bg: #161b22;
       --border: #30363d;
       --text: #c9d1d9;
-      --accent: #58a6ff;
+      --accent: #38bdf8;
     }
 
     body {
@@ -22,8 +22,9 @@
       line-height: 1.6;
     }
 
+    /* Expanded desktop width */
     .container {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -54,7 +55,7 @@
       background-color: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 24px;
+      padding: 28px;
       margin-top: 25px;
     }
 
@@ -75,7 +76,7 @@
     .sample-box {
       background-color: var(--bg);
       border-left: 4px solid var(--accent);
-      padding: 18px;
+      padding: 20px;
       border-radius: 4px;
       font-family: Georgia, serif;
       color: var(--text);
@@ -84,9 +85,9 @@
     }
 
     .prompt-box {
-      background-color: rgba(88, 166, 255, 0.08);
+      background-color: rgba(56, 189, 248, 0.08);
       border: 1px dashed var(--accent);
-      padding: 15px;
+      padding: 18px;
       border-radius: 6px;
       margin-bottom: 20px;
       font-size: 0.95rem;
@@ -113,7 +114,7 @@
     /* Controls for the Generator */
     .generator-controls {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
@@ -122,10 +123,11 @@
       background-color: var(--bg);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 8px 12px;
+      padding: 10px 14px;
       border-radius: 6px;
       font-size: 0.95rem;
       outline: none;
+      min-width: 200px;
     }
 
     .generator-controls select:focus {
@@ -134,12 +136,12 @@
 
     .vocab-badge {
       display: inline-block;
-      background-color: rgba(88, 166, 255, 0.15);
+      background-color: rgba(56, 189, 248, 0.15);
       color: var(--accent);
-      padding: 2px 8px;
+      padding: 4px 10px;
       border-radius: 4px;
       font-size: 0.85rem;
-      margin: 4px 4px 4px 0;
+      margin: 4px 6px 4px 0;
     }
   </style>
 </head>
@@ -392,11 +394,11 @@ Lots of love,
       } else if (task === 'article') {
         const title = getRandom(item.titles);
         promptHTML = `<strong>Task Prompt (School Magazine Article):</strong><br>Write an article for your school magazine about ${title} (120–160 words). Include arguments for both sides and a clear conclusion.`;
-        generatedText = `<strong>${title}</strong>\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
+        generatedText = `${title}\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
       } else if (task === 'report') {
         const title = getRandom(item.titles);
         promptHTML = `<strong>Task Prompt (Formal Report):</strong><br>Write a formal report for your school authority on ${title} (120–160 words). Include findings and recommendations.`;
-        generatedText = `<strong>${title}</strong>\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
+        generatedText = `${title}\n\n${getRandom(item.intros)}\n\n${getRandom(item.pros)}\n\n${getRandom(item.cons)}\n\n${getRandom(item.concls)}`;
       }
 
       document.getElementById('gen-prompt').innerHTML = promptHTML;
