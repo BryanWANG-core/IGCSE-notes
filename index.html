@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bryan's IGCSE Revision Hub</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --accent: #58a6ff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      color: var(--accent);
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #8b949e;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #fff;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: rgba(88, 166, 255, 0.15);
+      color: var(--accent);
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 14px;
+      background-color: var(--accent);
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📚 Bryan's IGCSE Revision Vault</h1>
+    <p class="subtitle">Notes, formula sheets, and past paper prep curated during my IGCSE journey.</p>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+
+      <!-- Biology -->
+      <div class="card">
+        <span class="tag">0610 / 0970</span>
+        <h3>Biology</h3>
+        <p>Paper 4 definitions, active recall flashcards, and key paper summaries.</p>
+        <a href="#" class="btn">View Notes</a>
+      </div>
+
+      <!-- Maths & Add Maths -->
+      <div class="card">
+        <span class="tag">0580 & 0606</span>
+        <h3>Maths & Add Maths</h3>
+        <p>Core formulas, differentiation/integration rules, and past paper tricks.</p>
+        <a href="#" class="btn">View Notes</a>
+      </div>
+
+      <!-- Physics & Chemistry -->
+      <div class="card">
+        <span class="tag">0625 & 0620</span>
+        <h3>Physics & Chemistry</h3>
+        <p>Key formulas, definition lists, and practical paper (Paper 6) tips.</p>
+        <a href="#" class="btn">View Notes</a>
+      </div>
+
+      <!-- Computer Science -->
+      <div class="card">
+        <span class="tag">0478 / 0984</span>
+        <h3>Computer Science</h3>
+        <p>Pseudocode syntax guides, logic gates, and hardware fundamentals.</p>
+        <a href="#" class="btn">View Notes</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>Maintained by <a href="https://github.com/BryanWANG-core">Bryan Wang</a> | Pre-U MUFY Journey</p>
+  </footer>
+
+</body>
+</html>
