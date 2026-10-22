@@ -185,8 +185,37 @@
     }
 
     .form-group input:focus, .form-group select:focus {
-      border-color: var(--accent-bright, var(--accent));
+      border-color: var(--accent);
       box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    /* Checkbox Topic Grid */
+    .topics-selector-box {
+      background: #0b0f19;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 15px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .topic-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .topic-checkbox-label input {
+      accent-color: var(--accent);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
     }
 
     .submit-btn {
@@ -433,7 +462,7 @@
     <!-- Default Storage/Tracker Hub (Always Visible) -->
     <div class="content-card">
       <h2>📊 Past Paper Performance Vault</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your completed papers to track scores permanently and surface recurring weak topics for future trend analysis.</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your completed papers and select your weak topics below for structured analytics and future graphing.</p>
 
       <form class="tracker-form" onsubmit="addPaperRecord(event)">
         <div class="form-group">
@@ -464,9 +493,29 @@
           <input type="text" id="paperScore" placeholder="34/40" required>
         </div>
 
+        <!-- Structured Checkbox Weakness Selector -->
         <div class="form-group full-width">
-          <label for="weakTopics">Weak Topics / Missed Concepts (Comma separated)</label>
-          <input type="text" id="weakTopics" placeholder="Osmosis, Xylem, Enzymes" required>
+          <label>Select Weak Topics / Missed Concepts from this Paper:</label>
+          <div class="topics-selector-box" id="topicsSelector">
+            <label class="topic-checkbox-label"><input type="checkbox" value="Cell Structure"> Cell Structure</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Movement into/out of cells"> Movement into/out of cells</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Biological Molecules"> Biological Molecules</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Enzymes"> Enzymes</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Plant Nutrition"> Plant Nutrition</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Human Nutrition"> Human Nutrition</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Transport in Plants"> Transport in Plants</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Transport in Animals"> Transport in Animals</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Diseases & Immunity"> Diseases & Immunity</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Gas Exchange in Humans"> Gas Exchange in Humans</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Respiration"> Respiration</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Excretion"> Excretion</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Coordination & Response"> Coordination & Response</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Drugs"> Drugs</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Reproduction"> Reproduction</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Inheritance"> Inheritance</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Selection & Evolution"> Selection & Evolution</label>
+            <label class="topic-checkbox-label"><input type="checkbox" value="Ecology & Biotechnology"> Ecology & Biotechnology</label>
+          </div>
         </div>
 
         <button type="submit" class="submit-btn">Save Record & Update Analysis</button>
@@ -474,8 +523,8 @@
 
       <!-- Smart Weakness Recommendation Box -->
       <div class="analysis-card" id="recommendation-box">
-        <h3>💡 AI Trend Recommendation</h3>
-        <p id="recommendation-text">No past paper entries logged yet. Add your first record above to start generating weakness trends.</p>
+        <h3>💡 In-Depth Mistake Analytics</h3>
+        <p id="recommendation-text">No past paper entries logged yet. Add your first record above to start generating standardized weakness trends.</p>
       </div>
 
       <!-- Logged Records Table -->
@@ -486,7 +535,7 @@
               <th>Paper</th>
               <th>Series</th>
               <th>Score</th>
-              <th>Weak Topics</th>
+              <th>Weak Topics Selected</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -654,7 +703,7 @@
 
       if (paperRecords.length === 0) {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No records logged yet.</td></tr>`;
-        document.getElementById('recommendation-textinnerText = "No past paper entries logged yet. Add your first record above to start generating weakness trends.";
+        document.getElementById('recommendation-text').innerHTML = "No past paper entries logged yet. Select your weak topics above when saving a record to start generating analytics.";
         return;
       }
 
@@ -662,28 +711,28 @@
 
       paperRecords.forEach((record, index) => {
         const row = document.createElement('tr');
+        const topicsList = record.topics.length > 0 ? record.topics.join(', ') : 'None selected';
+        
         row.innerHTML = `
           <td><strong>${record.paper}</strong></td>
           <td>${record.series} ${record.year}</td>
           <td><span style="color: var(--accent); font-weight: 600;">${record.score}</span></td>
-          <td>${record.weaknesses}</td>
+          <td>${topicsList}</td>
           <td><button class="delete-btn" onclick="deleteRecord(${index})">Remove</button></td>
         `;
         tbody.appendChild(row);
 
-        const topics = record.weaknesses.split(',');
-        topics.forEach(t => {
-          const cleanTopic = t.trim().toLowerCase();
-          if (cleanTopic) {
-            topicCounts[cleanTopic] = (topicCounts[cleanTopic] || 0) + 1;
-          }
+        record.topics.forEach(t => {
+          topicCounts[t] = (topicCounts[t] || 0) + 1;
         });
       });
 
       const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
       if (sortedTopics.length > 0) {
-        const topWeaknesses = sortedTopics.slice(0, 3).map(t => `<strong style="color: #fff;">${t.toUpperCase()}</strong>`).join(', ');
-        document.getElementById('recommendation-text').innerHTML = `Your recurring weak areas: ${topWeaknesses}. Target these in your next topical revision session.`;
+        const topWeaknesses = sortedTopics.slice(0, 3).map(t => `<strong style="color: #fff;">${t}</strong> (${topicCounts[t]} missed)`).join(', ');
+        document.getElementById('recommendation-text').innerHTML = `<strong>In-Depth Mistake Analysis:</strong> Your most frequently missed units are ${topWeaknesses}. Prioritize these in your next revision block!`;
+      } else {
+        document.getElementById('recommendation-text').innerHTML = "No weak topics selected in current records.";
       }
     }
 
@@ -693,13 +742,17 @@
       const series = document.getElementById('examSeries').value;
       const year = document.getElementById('examYear').value;
       const score = document.getElementById('paperScore').value;
-      const weaknesses = document.getElementById('weakTopics').value;
 
-      paperRecords.unshift({ paper, series, year, score, weaknesses });
+      // Gather checked topics
+      const checkboxes = document.querySelectorAll('#topicsSelector input[type="checkbox"]:checked');
+      const topics = Array.from(checkboxes).map(cb => cb.value);
+
+      paperRecords.unshift({ paper, series, year, score, topics });
       localStorage.setItem('bryan_bio_records', JSON.stringify(paperRecords));
 
+      // Reset form fields
       document.getElementById('paperScore').value = '';
-      document.getElementById('weakTopics').value = '';
+      checkboxes.forEach(cb => cb.checked = false);
 
       renderRecords();
     }
