@@ -652,7 +652,7 @@
     </div>
   </div>
 
-  <script>
+    <script>
     function openPaper(paper) {
       const contentView = document.getElementById('content-view');
       const secMcq = document.getElementById('section-mcq');
@@ -718,20 +718,23 @@
 
       paperRecords.forEach((record, index) => {
         const row = document.createElement('tr');
-        const topicsList = record.topics.length > 0 ? record.topics.join(', ') : 'None selected';
+        const topicsList = record.topics && record.topics.length > 0 ? record.topics.join(', ') : 'None selected';
+        const displayScore = record.percentage !== undefined ? `${record.score} (${record.percentage}%)` : record.score;
         
         row.innerHTML = `
           <td><strong>${record.paper}</strong></td>
           <td>${record.series} ${record.year}</td>
-          <td><span style="color: var(--accent-orange-bright); font-weight: 600;">${record.score}</span></td>
+          <td><span style="color: var(--accent-orange-bright); font-weight: 600;">${displayScore}</span></td>
           <td>${topicsList}</td>
           <td><button class="delete-btn" onclick="deleteRecord(${index})">Remove</button></td>
         `;
         tbody.appendChild(row);
 
-        record.topics.forEach(t => {
-          topicCounts[t] = (topicCounts[t] || 0) + 1;
-        });
+        if (record.topics) {
+          record.topics.forEach(t => {
+            topicCounts[t] = (topicCounts[t] || 0) + 1;
+          });
+        }
       });
 
       const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
@@ -748,13 +751,41 @@
       const paper = document.getElementById('paperType').value;
       const series = document.getElementById('examSeries').value;
       const year = document.getElementById('examYear').value;
-      const score = document.getElementById('paperScore').value;
+      const scoreInput = document.getElementById('paperScore').value.trim();
+
+      // Strict Score Validation (e.g. 34/40)
+      const scoreRegex = /^(\d+)\s*\/\s*(\d+)$/;
+      const match = scoreInput.match(scoreRegex);
+
+      if (!match) {
+        alert("Please enter a valid score format using numbers and a slash (e.g., 34/40).");
+        return;
+      }
+
+      const scoredMarks = parseInt(match[1]);
+      const totalMarks = parseInt(match[2]);
+
+      if (scoredMarks > totalMarks) {
+        alert("Scored marks cannot be higher than total marks!");
+        return;
+      }
+
+      // Calculate percentage for future analytics & graphs
+      const percentage = Math.round((scoredMarks / totalMarks) * 100);
 
       // Gather checked topics
       const checkboxes = document.querySelectorAll('#topicsSelector input[type="checkbox"]:checked');
       const topics = Array.from(checkboxes).map(cb => cb.value);
 
-      paperRecords.unshift({ paper, series, year, score, topics });
+      paperRecords.unshift({ 
+        paper, 
+        series, 
+        year, 
+        score: `${scoredMarks}/${totalMarks}`, 
+        percentage, 
+        topics 
+      });
+      
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(paperRecords));
 
       // Reset form fields
