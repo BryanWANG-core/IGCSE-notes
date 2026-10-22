@@ -1,65 +1,464 @@
-<!-- Expandable Past Paper Vault Button -->
-<div class="resource-accordion">
-  <button class="accordion-btn" onclick="toggleResources()">
-    <span>📚 Past Paper & Topical Question Vault</span>
-    <span id="accordion-icon">▼</span>
-  </button>
-  
-  <div id="resource-panel" class="accordion-panel" style="display: none;">
-    <div class="resource-grid">
+<!-- BIOLOGY webpage by me (bryan)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IGCSE Biology Notes | Bryan's Vault</title>
+  <style>
+    :root {
+      /* Rich, Deep Textbook Orange Theme */
+      --bg-gradient: linear-gradient(135deg, #c2410c 0%, #9a3412 50%, #7c2d12 100%);
+      --card-bg: rgba(67, 26, 3, 0.65);
+      --border: #ea580c; 
+      --text: #fff7ed;
+      --accent: #fdba74; 
+      --accent-bright: #ffffff;
+      --accent-glow: rgba(234, 88, 12, 0.45);
+      --warning-bg: rgba(239, 68, 68, 0.15);
+      --warning-border: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+      transform: translateX(-3px);
+    }
+
+    .header-box {
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 6px;
+      font-size: 2.2rem;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .code-badge {
+      display: inline-block;
+      background: rgba(234, 88, 12, 0.3);
+      color: #fed7aa;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* 3 Main Selection Cards Grid */
+    .paper-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+      margin-bottom: 30px;
+    }
+
+    .paper-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .paper-card:hover {
+      border-color: #fdba74;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -5px var(--accent-glow);
+    }
+
+    .paper-card.active {
+      border-color: #fdba74;
+      background: rgba(234, 88, 12, 0.35);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .paper-card h2 {
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.5rem;
+    }
+
+    .paper-card p {
+      color: #fed7aa;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Section Content Box */
+    .content-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-card h2 {
+      color: #fff;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    /* Resource Accordion Styling */
+    .resource-accordion {
+      margin: 20px 0 30px 0;
+    }
+
+    .accordion-btn {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      color: #ffffff;
+      padding: 16px 22px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.25s ease;
+    }
+
+    .accordion-btn:hover {
+      border-color: #fdba74;
+      background: rgba(234, 88, 12, 0.25);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .accordion-panel {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      padding: 22px;
+      margin-top: -4px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .resource-card h3 {
+      margin-top: 0;
+      color: #fdba74;
+      font-size: 1.05rem;
+    }
+
+    .resource-card p {
+      font-size: 0.9rem;
+      color: #fed7aa;
+      margin-bottom: 12px;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .resource-list li {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resource-list a {
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .resource-list a:hover {
+      color: #fdba74;
+      text-decoration: underline;
+    }
+
+    .resource-desc {
+      font-size: 0.82rem;
+      color: #fed7aa;
+      opacity: 0.85;
+    }
+
+    /* MCQ Special Styling Boxes */
+    .misconception-box {
+      background: rgba(239, 68, 68, 0.12);
+      border-left: 4px solid var(--warning-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 15px 0;
+    }
+
+    .misconception-title {
+      font-weight: bold;
+      color: #fca5a5;
+      margin-bottom: 6px;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .strategy-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .strategy-card h3 {
+      margin-top: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Back to Revision Hub</a>
+
+    <div class="header-box">
+      <h1>🐝 Biology Revision Vault</h1>
+      <span class="code-badge">Syllabus Code: 0610</span>
+    </div>
+
+    <!-- 3 Simple Main Paper Buttons -->
+    <div class="paper-grid">
+      <div class="paper-card" id="card-mcq" onclick="openPaper('mcq')">
+        <h2>📝 MCQ</h2>
+        <p>Paper 2 Multiple Choice</p>
+      </div>
+
+      <div class="paper-card" id="card-theory" onclick="openPaper('theory')">
+        <h2>📄 Theory</h2>
+        <p>Paper 4 Extended Theory</p>
+      </div>
+
+      <div class="paper-card" id="card-atp" onclick="openPaper('atp')">
+        <h2>🔬 ATP</h2>
+        <p>Paper 6 Alternative to Practical</p>
+      </div>
+    </div>
+
+    <!-- Dynamic Section View Area -->
+    <div id="content-view" class="content-card" style="display: none;">
       
-      <!-- Full Past Papers Category -->
-      <div class="resource-card">
-        <h3>📁 Full Past Papers (0610 Paper 2)</h3>
-        <p>Complete yearly papers with official mark schemes:</p>
-        <ul class="resource-list">
-          <li>
-            <a href="https://papacambridge.com/igcse-biology-0610/" target="_blank" rel="noopener noreferrer">
-              PapaCambridge Biology 0610 ↗
-            </a>
-            <span class="resource-desc">Full archive of past papers & mark schemes</span>
-          </li>
-          <li>
-            <a href="https://gceguide.com/past-papers/cambridge-igcse/biology-0610/" target="_blank" rel="noopener noreferrer">
-              GCE Guide Repository ↗
-            </a>
-            <span class="resource-desc">Fast PDF downloads for all exam series</span>
-          </li>
-          <li>
-            <a href="https://dynamicpapers.com/igcse-subject/biology-0610/" target="_blank" rel="noopener noreferrer">
-              Dynamic Papers ↗
-            </a>
-            <span class="resource-desc">Organized by year and session</span>
-          </li>
+      <!-- MCQ Section View -->
+      <div id="section-mcq" style="display: none;">
+        <h2>📝 Paper 2: MCQ High-Yield Strategy & Common Traps</h2>
+        
+        <!-- Expandable Past Paper Vault Button -->
+        <div class="resource-accordion">
+          <button class="accordion-btn" onclick="toggleResources()">
+            <span>📚 Past Paper & Topical Question Vault</span>
+            <span id="accordion-icon">▼</span>
+          </button>
+          
+          <div id="resource-panel" class="accordion-panel" style="display: none;">
+            <div class="resource-grid">
+              
+              <!-- Full Past Papers Category -->
+              <div class="resource-card">
+                <h3>📁 Full Past Papers (0610 Paper 2)</h3>
+                <p>Complete yearly papers with official mark schemes:</p>
+                <ul class="resource-list">
+                  <li>
+                    <a href="https://papacambridge.com/igcse-biology-0610/" target="_blank" rel="noopener noreferrer">
+                      PapaCambridge Biology 0610 ↗
+                    </a>
+                    <span class="resource-desc">Full archive of past papers & mark schemes</span>
+                  </li>
+                  <li>
+                    <a href="https://gceguide.com/past-papers/cambridge-igcse/biology-0610/" target="_blank" rel="noopener noreferrer">
+                      GCE Guide Repository ↗
+                    </a>
+                    <span class="resource-desc">Fast PDF downloads for all exam series</span>
+                  </li>
+                  <li>
+                    <a href="https://dynamicpapers.com/igcse-subject/biology-0610/" target="_blank" rel="noopener noreferrer">
+                      Dynamic Papers ↗
+                    </a>
+                    <span class="resource-desc">Organized by year and session</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Topical Past Papers Category -->
+              <div class="resource-card">
+                <h3>🎯 Topical Questions (Paper 2)</h3>
+                <p>Practice MCQ questions grouped strictly by chapter:</p>
+                <ul class="resource-list">
+                  <li>
+                    <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">
+                      Save My Exams (Topical) ↗
+                    </a>
+                    <span class="resource-desc">Categorized questions with detailed mark schemes</span>
+                  </li>
+                  <li>
+                    <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">
+                      Physics & Maths Tutor (PMT) ↗
+                    </a>
+                    <span class="resource-desc">Free downloadable topical question PDFs</span>
+                  </li>
+                  <li>
+                    <a href="https://znotes.org/caie/igcse/biology-0610/" target="_blank" rel="noopener noreferrer">
+                      ZNotes Revision Summaries ↗
+                    </a>
+                    <span class="resource-desc">Concise chapter-by-chapter quick revision</span>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Common Misconceptions Callouts -->
+        <h3 style="color: #fdba74; margin-top: 25px;">⚠️ Frequently Tested Misconceptions</h3>
+
+        <div class="misconception-box">
+          <div class="misconception-title">❌ Trap 1: "Enzymes die or are killed at high temperatures"</div>
+          <div><strong>Correct Concept:</strong> Enzymes are not living organisms; they cannot "die." At high temperatures, their active sites change shape permanently (they become <strong>denatured</strong>), preventing substrates from fitting. At low temperatures, they are simply inactive due to low kinetic energy.</div>
+        </div>
+
+        <div class="misconception-box">
+          <div class="misconception-title">❌ Trap 2: "Osmosis is just water moving from high to low concentration"</div>
+          <div><strong>Correct Concept:</strong> Always specify water potential! Osmosis is the net movement of water molecules from a region of <strong>higher water potential</strong> (dilute solution) to a region of <strong>lower water potential</strong> (concentrated solution) through a <strong>partially permeable membrane</strong>.</div>
+        </div>
+
+        <div class="misconception-box">
+          <div class="misconception-title">❌ Trap 3: "Respiration is the same as breathing"</div>
+          <div><strong>Correct Concept:</strong> Breathing (ventilation) is the mechanical muscle movement moving air in and out of lungs. Respiration is the <strong>chemical reaction inside cells</strong> that breaks down nutrient molecules (like glucose) to release energy.</div>
+        </div>
+
+        <div class="misconception-box">
+          <div class="misconception-title">❌ Trap 4: "Arteries always carry oxygenated blood"</div>
+          <div><strong>Correct Concept:</strong> Arteries carry blood <em>away from the heart</em>. The <strong>pulmonary artery</strong> is the major exception—it carries <em>deoxygenated</em> blood from the right ventricle to the lungs.</div>
+        </div>
+
+        <!-- Strategy Grid Cards -->
+        <h3 style="color: #fdba74; margin-top: 30px;">📌 Must-Remember MCQ Rules</h3>
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <h3>🔬 Magnification Formula</h3>
+            <p>Remember <strong>I = A × M</strong> (Image size = Actual size × Magnification).</p>
+            <p><em>Check units carefully!</em> Always convert millimetres (mm) to micrometres (µm) by multiplying by <strong>1,000</strong> before calculating.</p>
+          </div>
+
+          <div class="strategy-card">
+            <h3>🌱 Plant Transport Distinctions</h3>
+            <p><strong>Xylem:</strong> Unidirectional (roots to leaves), dead tissue, carries water + mineral salts, supported by lignin.</p>
+            <p><strong>Phloem:</strong> Bidirectional, living tissue, carries sucrose + amino acids (translocation).</p>
+          </div>
+
+          <div class="strategy-card">
+            <h3>🧪 Food Test Color Triggers</h3>
+            <p>• <strong>Reducing Sugar (Benedict's):</strong> Blue ➔ Green ➔ Yellow ➔ Brick Red (requires heat!)</p>
+            <p>• <strong>Starch (Iodine):</strong> Yellow-brown ➔ Blue-black</p>
+            <p>• <strong>Protein (Biuret):</strong> Blue ➔ Purple/Violet</p>
+            <p>• <strong>Fats (Ethanol Emulsion):</strong> Clear ➔ Milky-white emulsion</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Theory Section View -->
+      <div id="section-theory" style="display: none;">
+        <h2>📄 Paper 4: Theory Notes & High-Yield Topics</h2>
+        <p>closed:</p>
+        <ul>
+          <li><strong>COMING SOON 🔥</strong></li>
         </ul>
       </div>
 
-      <!-- Topical Past Papers Category -->
-      <div class="resource-card">
-        <h3>🎯 Topical Questions (Paper 2)</h3>
-        <p>Practice MCQ questions grouped strictly by chapter:</p>
-        <ul class="resource-list">
-          <li>
-            <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">
-              Save My Exams (Topical) ↗
-            </a>
-            <span class="resource-desc">Categorized questions with detailed mark schemes</span>
-          </li>
-          <li>
-            <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">
-              Physics & Maths Tutor (PMT) ↗
-            </a>
-            <span class="resource-desc">Free downloadable topical question PDFs</span>
-          </li>
-          <li>
-            <a href="https://znotes.org/caie/igcse/biology-0610/" target="_blank" rel="noopener noreferrer">
-              ZNotes Revision Summaries ↗
-            </a>
-            <span class="resource-desc">Concise chapter-by-chapter quick revision</span>
-          </li>
+      <!-- ATP Section View -->
+      <div id="section-atp" style="display: none;">
+        <h2>🔬 Paper 6: Alternative to Practical (ATP)</h2>
+        <p>closed:</p>
+        <ul>
+          <li><strong>COMING SOON</strong> 💖</li>
         </ul>
       </div>
 
     </div>
   </div>
-</div>
+
+  <script>
+    function openPaper(paper) {
+      const contentView = document.getElementById('content-view');
+      const secMcq = document.getElementById('section-mcq');
+      const secTheory = document.getElementById('section-theory');
+      const secAtp = document.getElementById('section-atp');
+
+      const cardMcq = document.getElementById('card-mcq');
+      const cardTheory = document.getElementById('card-theory');
+      const cardAtp = document.getElementById('card-atp');
+
+      // Reset card highlights
+      cardMcq.classList.remove('active');
+      cardTheory.classList.remove('active');
+      cardAtp.classList.remove('active');
+
+      // Hide all content blocks
+      secMcq.style.display = 'none';
+      secTheory.style.display = 'none';
+      secAtp.style.display = 'none';
+
+      // Show selected content and highlight active card
+      contentView.style.display = '
