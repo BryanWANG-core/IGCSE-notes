@@ -1,249 +1,65 @@
-<!-- BIOLOGY webpage by me (bryan)-->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IGCSE Biology Notes | Bryan's Vault</title>
-  <style>
-    :root {
-      /* Rich, Deep Textbook Orange Theme */
-      --bg-gradient: linear-gradient(135deg, #c2410c 0%, #9a3412 50%, #7c2d12 100%);
-      --card-bg: rgba(67, 26, 3, 0.65);
-      --border: #ea580c; 
-      --text: #fff7ed;
-      --accent: #fdba74; 
-      --accent-bright: #ffffff;
-      --accent-glow: rgba(234, 88, 12, 0.45);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-gradient);
-      background-attachment: fixed;
-      color: var(--text);
-      margin: 0;
-      padding: 40px 20px;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .back-btn {
-      display: inline-block;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: bold;
-      margin-bottom: 20px;
-      transition: transform 0.2s;
-    }
-
-    .back-btn:hover {
-      text-decoration: underline;
-      transform: translateX(-3px);
-    }
-
-    .header-box {
-      margin-bottom: 30px;
-    }
-
-    h1 {
-      color: #fff;
-      margin-bottom: 6px;
-      font-size: 2.2rem;
-      letter-spacing: -0.5px;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .code-badge {
-      display: inline-block;
-      background: rgba(234, 88, 12, 0.3);
-      color: #fed7aa;
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 20px;
-    }
-
-    /* 3 Main Selection Cards Grid */
-    .paper-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 25px;
-      margin-bottom: 30px;
-    }
-
-    .paper-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px;
-      text-align: center;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .paper-card:hover {
-      border-color: #fdba74;
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px -5px var(--accent-glow);
-    }
-
-    .paper-card.active {
-      border-color: #fdba74;
-      background: rgba(234, 88, 12, 0.35);
-      box-shadow: 0 0 25px var(--accent-glow);
-    }
-
-    .paper-card h2 {
-      color: #fff;
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 1.5rem;
-    }
-
-    .paper-card p {
-      color: #fed7aa;
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    /* Section Content Box */
-    .content-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-    }
-
-    .content-card h2 {
-      color: #fff;
-      margin-top: 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <a href="index.html" class="back-btn">← Back to Revision Hub</a>
-
-    <div class="header-box">
-      <h1>🐝 Biology Revision Vault</h1>
-      <span class="code-badge">Syllabus Code: 0610</span>
-    </div>
-
-    <!-- 3 Simple Main Paper Buttons -->
-    <div class="paper-grid">
-      <div class="paper-card" id="card-mcq" onclick="openPaper('mcq')">
-        <h2>📝 MCQ</h2>
-        <p>Paper 2 Multiple Choice</p>
-      </div>
-
-      <div class="paper-card" id="card-theory" onclick="openPaper('theory')">
-        <h2>📄 Theory</h2>
-        <p>Paper 4 Extended Theory</p>
-      </div>
-
-      <div class="paper-card" id="card-atp" onclick="openPaper('atp')">
-        <h2>🔬 ATP</h2>
-        <p>Paper 6 Alternative to Practical</p>
-      </div>
-    </div>
-
-    <!-- Dynamic Section View Area -->
-    <div id="content-view" class="content-card" style="display: none;">
+<!-- Expandable Past Paper Vault Button -->
+<div class="resource-accordion">
+  <button class="accordion-btn" onclick="toggleResources()">
+    <span>📚 Past Paper & Topical Question Vault</span>
+    <span id="accordion-icon">▼</span>
+  </button>
+  
+  <div id="resource-panel" class="accordion-panel" style="display: none;">
+    <div class="resource-grid">
       
-      <!-- MCQ Section View (No Questions) -->
-      <div id="section-mcq" style="display: none;">
-        <h2>📝 Paper 2: MCQ Overview & Strategy</h2>
-        <p>Key techniques for tackling 0610 Paper 2 multiple-choice questions:</p>
-        <ul>
-          <li><strong>Elimination Method:</strong> Rule out two obviously incorrect options immediately before focusing on subtle differences between the remaining choices.</li>
-          <li><strong>Key Definitions:</strong> Watch for strict definitions regarding osmosis, active transport, and enzyme denaturation.</li>
-          <li><strong>Data & Graphs:</strong> Pay close attention to axis labels and units on rate-of-reaction graphs.</li>
+      <!-- Full Past Papers Category -->
+      <div class="resource-card">
+        <h3>📁 Full Past Papers (0610 Paper 2)</h3>
+        <p>Complete yearly papers with official mark schemes:</p>
+        <ul class="resource-list">
+          <li>
+            <a href="https://papacambridge.com/igcse-biology-0610/" target="_blank" rel="noopener noreferrer">
+              PapaCambridge Biology 0610 ↗
+            </a>
+            <span class="resource-desc">Full archive of past papers & mark schemes</span>
+          </li>
+          <li>
+            <a href="https://gceguide.com/past-papers/cambridge-igcse/biology-0610/" target="_blank" rel="noopener noreferrer">
+              GCE Guide Repository ↗
+            </a>
+            <span class="resource-desc">Fast PDF downloads for all exam series</span>
+          </li>
+          <li>
+            <a href="https://dynamicpapers.com/igcse-subject/biology-0610/" target="_blank" rel="noopener noreferrer">
+              Dynamic Papers ↗
+            </a>
+            <span class="resource-desc">Organized by year and session</span>
+          </li>
         </ul>
       </div>
 
-      <!-- Theory Section View -->
-      <div id="section-theory" style="display: none;">
-        <h2>📄 Paper 4: Theory Notes & High-Yield Topics</h2>
-        <p>closed:</p>
-        <ul>
-          <li><strong>COMING SOON 🔥</strong></li>
-        </ul>
-      </div>
-
-      <!-- ATP Section View -->
-      <div id="section-atp" style="display: none;">
-        <h2>🔬 Paper 6: Alternative to Practical (ATP)</h2>
-        <p>closed:</p>
-        <ul>
-          <li><strong>COMING SOON</strong> 💖</li>
+      <!-- Topical Past Papers Category -->
+      <div class="resource-card">
+        <h3>🎯 Topical Questions (Paper 2)</h3>
+        <p>Practice MCQ questions grouped strictly by chapter:</p>
+        <ul class="resource-list">
+          <li>
+            <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">
+              Save My Exams (Topical) ↗
+            </a>
+            <span class="resource-desc">Categorized questions with detailed mark schemes</span>
+          </li>
+          <li>
+            <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">
+              Physics & Maths Tutor (PMT) ↗
+            </a>
+            <span class="resource-desc">Free downloadable topical question PDFs</span>
+          </li>
+          <li>
+            <a href="https://znotes.org/caie/igcse/biology-0610/" target="_blank" rel="noopener noreferrer">
+              ZNotes Revision Summaries ↗
+            </a>
+            <span class="resource-desc">Concise chapter-by-chapter quick revision</span>
+          </li>
         </ul>
       </div>
 
     </div>
   </div>
-
-  <script>
-    function openPaper(paper) {
-      const contentView = document.getElementById('content-view');
-      const secMcq = document.getElementById('section-mcq');
-      const secTheory = document.getElementById('section-theory');
-      const secAtp = document.getElementById('section-atp');
-
-      const cardMcq = document.getElementById('card-mcq');
-      const cardTheory = document.getElementById('card-theory');
-      const cardAtp = document.getElementById('card-atp');
-
-      // Reset card highlights
-      cardMcq.classList.remove('active');
-      cardTheory.classList.remove('active');
-      cardAtp.classList.remove('active');
-
-      // Hide all content blocks
-      secMcq.style.display = 'none';
-      secTheory.style.display = 'none';
-      secAtp.style.display = 'none';
-
-      // Show selected content and highlight active card
-      contentView.style.display = 'block';
-
-      if (paper === 'mcq') {
-        cardMcq.classList.add('active');
-        secMcq.style.display = 'block';
-      } else if (paper === 'theory') {
-        cardTheory.classList.add('active');
-        secTheory.style.display = 'block';
-      } else if (paper === 'atp') {
-        cardAtp.classList.add('active');
-        secAtp.style.display = 'block';
-      }
-    }
-  </script>
-</body>
-</html>
+</div>
