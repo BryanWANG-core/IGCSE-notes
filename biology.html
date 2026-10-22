@@ -131,6 +131,7 @@
       padding: 30px;
       backdrop-filter: blur(10px);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      margin-bottom: 30px;
     }
 
     .content-card h2 {
@@ -138,6 +139,119 @@
       margin-top: 0;
       border-bottom: 1px solid var(--border);
       padding-bottom: 10px;
+    }
+
+    /* Tracker Form Styling */
+    .tracker-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .form-group input, .form-group select {
+      background: rgba(45, 18, 5, 0.9);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: #fdba74;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .submit-btn {
+      grid-column: 1 / -1;
+      background: var(--border);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #c2410c;
+    }
+
+    /* Tracker Table Styling */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 25px;
+    }
+
+    .tracker-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .tracker-table th, .tracker-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .tracker-table th {
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .tracker-table td {
+      font-size: 0.9rem;
+    }
+
+    .delete-btn {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid var(--warning-border);
+      color: #fca5a5;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: rgba(239, 68, 68, 0.4);
+    }
+
+    .analysis-card {
+      background: rgba(234, 88, 12, 0.15);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 25px;
+    }
+
+    .analysis-card h3 {
+      margin-top: 0;
+      color: var(--accent);
     }
 
     /* Resource Accordion Styling */
@@ -296,6 +410,74 @@
       </div>
     </div>
 
+    <!-- Default Storage/Tracker Hub (Always Visible) -->
+    <div class="content-card">
+      <h2>📊 Past Paper Marks & Weakness Vault</h2>
+      <p>Log your completed past papers to permanently track your scores and automatically detect weak topics:</p>
+
+      <form class="tracker-form" onsubmit="addPaperRecord(event)">
+        <div class="form-group">
+          <label for="paperType">Paper Type</label>
+          <select id="paperType" required>
+            <option value="Paper 2 (MCQ)">Paper 2 (MCQ)</option>
+            <option value="Paper 4 (Theory)">Paper 4 (Theory)</option>
+            <option value="Paper 6 (ATP)">Paper 6 (ATP)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="examSeries">Exam Series</label>
+          <select id="examSeries" required>
+            <option value="Feb/March">Feb/March</option>
+            <option value="May/June">May/June</option>
+            <option value="Oct/Nov">Oct/Nov</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="examYear">Year</label>
+          <input type="number" id="examYear" placeholder="e.g. 2023" min="2016" max="2026" required>
+        </div>
+
+        <div class="form-group">
+          <label for="paperScore">Score (e.g. 34/40)</label>
+          <input type="text" id="paperScore" placeholder="32/40" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="weakTopics">Weak Topics / Questions Missed (Separated by commas)</label>
+          <input type="text" id="weakTopics" placeholder="e.g. Osmosis, Xylem vs Phloem, Food tests" required>
+        </div>
+
+        <button type="submit" class="submit-btn">💾 Save Paper Record</button>
+      </form>
+
+      <!-- Smart Weakness Recommendation Box -->
+      <div class="analysis-card" id="recommendation-box">
+        <h3>💡 Targeted Focus Areas</h3>
+        <p id="recommendation-text">No past paper entries logged yet. Add your first record above to start generating weakness trends!</p>
+      </div>
+
+      <!-- Logged Records Table -->
+      <div class="table-container">
+        <table class="tracker-table">
+          <thead>
+            <tr>
+              <th>Paper</th>
+              <th>Series & Year</th>
+              <th>Score</th>
+              <th>Weak Topics</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tracker-table-body">
+            <!-- Records dynamically populated here -->
+          </tbody>
+        </table>
+      </div>
+      <button onclick="clearAllRecords()" style="margin-top: 15px; background: transparent; color: #fca5a5; border: 1px solid var(--warning-border); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">🗑️ Clear All Saved History</button>
+    </div>
+
     <!-- Dynamic Section View Area -->
     <div id="content-view" class="content-card" style="display: none;">
       
@@ -440,6 +622,7 @@
   </div>
 
   <script>
+    // Tab Swapping Function
     function openPaper(paper) {
       const contentView = document.getElementById('content-view');
       const secMcq = document.getElementById('section-mcq');
@@ -450,15 +633,122 @@
       const cardTheory = document.getElementById('card-theory');
       const cardAtp = document.getElementById('card-atp');
 
-      // Reset card highlights
       cardMcq.classList.remove('active');
       cardTheory.classList.remove('active');
       cardAtp.classList.remove('active');
 
-      // Hide all content blocks
       secMcq.style.display = 'none';
       secTheory.style.display = 'none';
       secAtp.style.display = 'none';
 
-      // Show selected content and highlight active card
-      contentView.style.display = '
+      contentView.style.display = 'block';
+
+      if (paper === 'mcq') {
+        cardMcq.classList.add('active');
+        secMcq.style.display = 'block';
+      } else if (paper === 'theory') {
+        cardTheory.classList.add('active');
+        secTheory.style.display = 'block';
+      } else if (paper === 'atp') {
+        cardAtp.classList.add('active');
+        secAtp.style.display = 'block';
+      }
+
+      contentView.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Accordion Toggle Function
+    function toggleResources() {
+      const panel = document.getElementById('resource-panel');
+      const icon = document.getElementById('accordion-icon');
+
+      if (panel.style.display === 'none' || panel.style.display === '') {
+        panel.style.display = 'block';
+        icon.innerText = '▲';
+      } else {
+        panel.style.display = 'none';
+        icon.innerText = '▼';
+      }
+    }
+
+    // Storage Tracker Logic
+    let paperRecords = JSON.parse(localStorage.getItem('bryan_bio_records')) || [];
+
+    function renderRecords() {
+      const tbody = document.getElementById('tracker-table-body');
+      tbody.innerHTML = '';
+
+      if (paperRecords.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #fed7aa;">No past papers logged yet.</td></tr>`;
+        document.getElementById('recommendation-text').innerText = "No past paper entries logged yet. Add your first record above to start generating weakness trends!";
+        return;
+      }
+
+      const topicCounts = {};
+
+      paperRecords.forEach((record, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${record.paper}</strong></td>
+          <td>${record.series} ${record.year}</td>
+          <td><span style="color: var(--accent); font-weight: bold;">${record.score}</span></td>
+          <td>${record.weaknesses}</td>
+          <td><button class="delete-btn" onclick="deleteRecord(${index})">Delete</button></td>
+        `;
+        tbody.appendChild(row);
+
+        // Process weak topics for recommendation engine
+        const topics = record.weaknesses.split(',');
+        topics.forEach(t => {
+          const cleanTopic = t.trim().toLowerCase();
+          if (cleanTopic) {
+            topicCounts[cleanTopic] = (topicCounts[cleanTopic] || 0) + 1;
+          }
+        });
+      });
+
+      // Update Recommendation Text
+      const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
+      if (sortedTopics.length > 0) {
+        const topWeaknesses = sortedTopics.slice(0, 3).map(t => `<strong>${t.toUpperCase()}</strong>`).join(', ');
+        document.getElementById('recommendation-text').innerHTML = `Based on your logged papers, your most frequent weak areas are: ${topWeaknesses}. Prioritize reviewing these topics in topical past paper banks!`;
+      }
+    }
+
+    function addPaperRecord(e) {
+      e.preventDefault();
+      const paper = document.getElementById('paperType').value;
+      const series = document.getElementById('examSeries').value;
+      const year = document.getElementById('examYear').value;
+      const score = document.getElementById('paperScore').value;
+      const weaknesses = document.getElementById('weakTopics').value;
+
+      paperRecords.unshift({ paper, series, year, score, weaknesses });
+      localStorage.setItem('bryan_bio_records', JSON.stringify(paperRecords));
+
+      // Reset Form
+      document.getElementById('paperScore').value = '';
+      document.getElementById('weakTopics').value = '';
+
+      renderRecords();
+    }
+
+    function deleteRecord(index) {
+      paperRecords.splice(index, 1);
+      localStorage.setItem('bryan_bio_records', JSON.stringify(paperRecords));
+      renderRecords();
+    }
+
+    function clearAllRecords() {
+      if (confirm("Are you sure you want to clear all logged paper records?")) {
+        paperRecords = [];
+        localStorage.removeItem('bryan_bio_records');
+        renderRecords();
+      }
+    }
+
+    // Load initial records on page render
+    renderRecords();
+  </script>
+</body>
+</html>
