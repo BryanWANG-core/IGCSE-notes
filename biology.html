@@ -8,17 +8,13 @@
   <title>IGCSE Biology Notes | Bryan's Vault</title>
   <style>
     :root {
-      /* Biology Theme: Emerald & Forest Teal Gradients */
-      --bg-gradient: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
-      --card-bg: rgba(6, 78, 59, 0.45);
-      --border: #115e59;
-      --text: #e2e8f0;
-      --accent: #34d399; /* Emerald accent */
-      --accent-glow: rgba(52, 211, 153, 0.25);
-      --correct-bg: rgba(34, 197, 94, 0.15);
-      --correct-border: #22c55e;
-      --wrong-bg: rgba(239, 68, 68, 0.15);
-      --wrong-border: #ef4444;
+      /* Cambridge Biology Orange Gradient Theme */
+      --bg-gradient: linear-gradient(135deg, #451a03 0%, #1c0a00 100%);
+      --card-bg: rgba(67, 26, 3, 0.55);
+      --border: #7c2d12;
+      --text: #fef3c7;
+      --accent: #f97316; /* Vibrant Cambridge Orange */
+      --accent-glow: rgba(249, 115, 22, 0.3);
     }
 
     * {
@@ -56,7 +52,7 @@
     }
 
     .header-box {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     h1 {
@@ -68,7 +64,7 @@
 
     .code-badge {
       display: inline-block;
-      background: rgba(52, 211, 153, 0.15);
+      background: rgba(249, 115, 22, 0.15);
       color: var(--accent);
       border: 1px solid var(--accent);
       font-size: 0.85rem;
@@ -77,159 +73,75 @@
       border-radius: 20px;
     }
 
-    /* Paper Type Toggle Switcher */
-    .paper-switcher {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
+    /* 3 Main Selection Cards Grid */
+    .paper-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
       margin-bottom: 30px;
-      flex-wrap: wrap;
     }
 
-    .paper-btn {
-      flex: 1;
-      min-width: 150px;
-      padding: 16px 20px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 12px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .paper-btn:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .paper-btn.active {
-      background: var(--accent);
-      color: #022c22;
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .topic-card {
+    .paper-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 28px;
-      margin-top: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Filter Bar */
-    .filter-controls {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .filter-controls select {
-      background-color: rgba(2, 44, 34, 0.9);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      outline: none;
-      cursor: pointer;
-    }
-
-    /* Question Container & Options */
-    .mcq-card {
-      background: rgba(2, 44, 34, 0.7);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 25px;
-    }
-
-    .question-tag {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--accent);
-      background: rgba(52, 211, 153, 0.1);
-      padding: 3px 10px;
-      border-radius: 6px;
-      margin-bottom: 12px;
-    }
-
-    .question-text {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 18px;
-    }
-
-    .options-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .option-btn {
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 12px 18px;
-      border-radius: 8px;
-      text-align: left;
-      font-size: 0.98rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .option-btn:hover:not([disabled]) {
-      border-color: var(--accent);
-      background: rgba(52, 211, 153, 0.08);
-    }
-
-    .option-btn.correct {
-      background: var(--correct-bg) !important;
-      border-color: var(--correct-border) !important;
-      color: #4ade80 !important;
-      font-weight: 700;
-    }
-
-    .option-btn.wrong {
-      background: var(--wrong-bg) !important;
-      border-color: var(--wrong-border) !important;
-      color: #f87171 !important;
-    }
-
-    .explanation-box {
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 8px;
-      background: rgba(15, 23, 42, 0.8);
-      border-left: 4px solid var(--accent);
-      font-size: 0.95rem;
-      display: none;
-    }
-
-    .explanation-title {
-      font-weight: bold;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .placeholder-view {
       text-align: center;
-      padding: 50px 20px;
-      color: #94a3b8;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .paper-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -5px var(--accent-glow);
+    }
+
+    .paper-card.active {
+      border-color: var(--accent);
+      background: rgba(249, 115, 22, 0.18);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .paper-card h2 {
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.5rem;
+    }
+
+    .paper-card p {
+      color: #fdba74;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Section Content Box */
+    .content-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-card h2 {
+      color: #fff;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -238,194 +150,102 @@
     <a href="index.html" class="back-btn">← Back to Revision Hub</a>
 
     <div class="header-box">
-      <h1>🧬 Biology Revision Vault</h1>
+      <h1>🐝 Biology Revision Vault</h1>
       <span class="code-badge">Syllabus Code: 0610</span>
     </div>
 
-    <!-- Paper Type Navigation Buttons -->
-    <div class="paper-switcher">
-      <button class="paper-btn active" id="btn-mcq" onclick="switchPaper('mcq')">📝 MCQ Practice</button>
-      <button class="paper-btn" id="btn-theory" onclick="switchPaper('theory')">📄 Theory Notes</button>
-      <button class="paper-btn" id="btn-atp" onclick="switchPaper('atp')">🔬 ATP (Alternative to Practical)</button>
-    </div>
-
-    <!-- MCQ Section View -->
-    <div id="mcq-view" class="topic-card">
-      <div class="filter-controls">
-        <h2 style="margin: 0; flex-grow: 1;">🧬 Multiple Choice Vault</h2>
-        <label for="topic-filter" style="font-size: 0.9rem; color: #94a3b8;">Filter Topic:</label>
-        <select id="topic-filter" onchange="filterQuestions()">
-          <option value="all">All Topics</option>
-          <option value="cells">Cell Structure & Transport</option>
-          <option value="enzymes">Enzymes & Biological Molecules</option>
-          <option value="plants">Plant Nutrition & Transport</option>
-        </select>
+    <!-- 3 Simple Main Paper Buttons -->
+    <div class="paper-grid">
+      <div class="paper-card" id="card-mcq" onclick="openPaper('mcq')">
+        <h2>📝 MCQ</h2>
+        <p>Paper 2 Multiple Choice</p>
       </div>
 
-      <!-- Question List Container -->
-      <div id="questions-container"></div>
-    </div>
+      <div class="paper-card" id="card-theory" onclick="openPaper('theory')">
+        <h2>📄 Theory</h2>
+        <p>Paper 4 Extended Theory</p>
+      </div>
 
-    <!-- Theory Section View (Placeholder) -->
-    <div id="theory-view" class="topic-card" style="display: none;">
-      <div class="placeholder-view">
-        <h2>📄 Theory Notes Section</h2>
-        <p>Theory materials and structured question guides are coming soon!</p>
+      <div class="paper-card" id="card-atp" onclick="openPaper('atp')">
+        <h2>🔬 ATP</h2>
+        <p>Paper 6 Alternative to Practical</p>
       </div>
     </div>
 
-    <!-- ATP Section View (Placeholder) -->
-    <div id="atp-view" class="topic-card" style="display: none;">
-      <div class="placeholder-view">
-        <h2>🔬 Alternative to Practical (Paper 6)</h2>
-        <p>ATP experiment guides, food tests, and drawing rules coming soon!</p>
+    <!-- Dynamic Section View Area -->
+    <div id="content-view" class="content-card" style="display: none;">
+      
+      <!-- MCQ Section View (No Questions) -->
+      <div id="section-mcq" style="display: none;">
+        <h2>📝 Paper 2: MCQ Overview & Strategy</h2>
+        <p>Key techniques for tackling 0610 Paper 2 multiple-choice questions:</p>
+        <ul>
+          <li><strong>Elimination Method:</strong> Rule out two obviously incorrect options immediately before focusing on subtle differences between the remaining choices.</li>
+          <li><strong>Key Definitions:</strong> Watch for strict definitions regarding osmosis, active transport, and enzyme denaturation.</li>
+          <li><strong>Data & Graphs:</strong> Pay close attention to axis labels and units on rate-of-reaction graphs.</li>
+        </ul>
       </div>
-    </div>
 
+      <!-- Theory Section View -->
+      <div id="section-theory" style="display: none;">
+        <h2>📄 Paper 4: Theory Notes & High-Yield Topics</h2>
+        <p>Structured notes covering core syllabus units:</p>
+        <ul>
+          <li><strong>Cell Structure & Organization:</strong> Plant vs. animal cell organelle functions.</li>
+          <li><strong>Enzymes & Biological Molecules:</strong> Temperature and pH effects on active site specificity.</li>
+          <li><strong>Transport in Plants & Humans:</strong> Xylem/phloem, transpiration pull, and circulatory pathways.</li>
+        </ul>
+      </div>
+
+      <!-- ATP Section View -->
+      <div id="section-atp" style="display: none;">
+        <h2>🔬 Paper 6: Alternative to Practical (ATP)</h2>
+        <p>Essential practical skills and food test summaries:</p>
+        <ul>
+          <li><strong>Food Tests:</strong> Benedict's (reducing sugars), Iodine (starch), Biuret (proteins), Ethanol emulsion (lipids).</li>
+          <li><strong>Biological Drawing Rules:</strong> Use clear continuous lines, no shading/cross-hatching, label lines drawn with a ruler touching the target structure.</li>
+          <li><strong>Variables:</strong> Clear identification of independent, dependent, and controlled variables in experiment designs.</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
 
   <script>
-    // MCQ Question Bank Data
-    const mcqData = [
-      {
-        id: 1,
-        topic: "cells",
-        topicLabel: "Cell Structure & Transport",
-        question: "Which cell structure is present in plant cells but absent in animal cells?",
-        options: [
-          "A. Cell membrane",
-          "B. Permanent central vacuole",
-          "C. Cytoplasm",
-          "D. Ribosomes"
-        ],
-        correct: 1, // B
-        explanation: "Plant cells possess a large permanent central vacuole containing cell sap, whereas animal cells may only have temporary, small vacuoles."
-      },
-      {
-        id: 2,
-        topic: "enzymes",
-        topicLabel: "Enzymes & Biological Molecules",
-        question: "What happens to an enzyme when it is exposed to temperatures far above its optimum?",
-        options: [
-          "A. Its active site changes shape permanently and it denatures",
-          "B. Its kinetic energy drops to zero and reaction stops reversibly",
-          "C. The substrate changes shape to fit the enzyme",
-          "D. It works faster because of higher collision frequency"
-        ],
-        correct: 0, // A
-        explanation: "High temperatures cause excessive vibration, breaking the bonds maintaining the enzyme's 3D structure. The active site loses its specific shape, so the substrate can no longer fit (denaturation)."
-      },
-      {
-        id: 3,
-        topic: "plants",
-        topicLabel: "Plant Nutrition & Transport",
-        question: "Which tissue transports water and mineral ions upwards through a plant?",
-        options: [
-          "A. Phloem",
-          "B. Root hair cell",
-          "C. Xylem",
-          "D. Mesophyll"
-        ],
-        correct: 2, // C
-        explanation: "Xylem vessels conduct water and dissolved mineral salts unidirectionally from roots to leaves, supported by lignin in their walls."
-      }
-    ];
+    function openPaper(paper) {
+      const contentView = document.getElementById('content-view');
+      const secMcq = document.getElementById('section-mcq');
+      const secTheory = document.getElementById('section-theory');
+      const secAtp = document.getElementById('section-atp');
 
-    // Function to Switch Between Paper Views (MCQ / Theory / ATP)
-    function switchPaper(paperType) {
-      document.getElementById('mcq-view').style.display = 'none';
-      document.getElementById('theory-view').style.display = 'none';
-      document.getElementById('atp-view').style.display = 'none';
+      const cardMcq = document.getElementById('card-mcq');
+      const cardTheory = document.getElementById('card-theory');
+      const cardAtp = document.getElementById('card-atp');
 
-      document.getElementById('btn-mcq').classList.remove('active');
-      document.getElementById('btn-theory').classList.remove('active');
-      document.getElementById('btn-atp').classList.remove('active');
+      // Reset card highlights
+      cardMcq.classList.remove('active');
+      cardTheory.classList.remove('active');
+      cardAtp.classList.remove('active');
 
-      if (paperType === 'mcq') {
-        document.getElementById('mcq-view').style.display = 'block';
-        document.getElementById('btn-mcq').classList.add('active');
-      } else if (paperType === 'theory') {
-        document.getElementById('theory-view').style.display = 'block';
-        document.getElementById('btn-theory').classList.add('active');
-      } else if (paperType === 'atp') {
-        document.getElementById('atp-view').style.display = 'block';
-        document.getElementById('btn-atp').classList.add('active');
+      // Hide all content blocks
+      secMcq.style.display = 'none';
+      secTheory.style.display = 'none';
+      secAtp.style.display = 'none';
+
+      // Show selected content and highlight active card
+      contentView.style.display = 'block';
+
+      if (paper === 'mcq') {
+        cardMcq.classList.add('active');
+        secMcq.style.display = 'block';
+      } else if (paper === 'theory') {
+        cardTheory.classList.add('active');
+        secTheory.style.display = 'block';
+      } else if (paper === 'atp') {
+        cardAtp.classList.add('active');
+        secAtp.style.display = 'block';
       }
     }
-
-    // Function to Render MCQ Questions
-    function renderQuestions(filter = 'all') {
-      const container = document.getElementById('questions-container');
-      container.innerHTML = '';
-
-      const filteredQuestions = filter === 'all' 
-        ? mcqData 
-        : mcqData.filter(q => q.topic === filter);
-
-      if (filteredQuestions.length === 0) {
-        container.innerHTML = '<p style="color: #94a3b8; text-align: center;">No questions found for this topic filter.</p>';
-        return;
-      }
-
-      filteredQuestions.forEach((q, index) => {
-        const card = document.createElement('div');
-        card.className = 'mcq-card';
-
-        let optionsHTML = '';
-        q.options.forEach((opt, optIndex) => {
-          optionsHTML += `
-            <button class="option-btn" onclick="checkAnswer(${q.id}, ${optIndex}, this)">
-              ${opt}
-            </button>
-          `;
-        });
-
-        card.innerHTML = `
-          <span class="question-tag">${q.topicLabel}</span>
-          <div class="question-text">Q${index + 1}. ${q.question}</div>
-          <div class="options-grid" id="options-q${q.id}">
-            ${optionsHTML}
-          </div>
-          <div class="explanation-box" id="explain-q${q.id}">
-            <div class="explanation-title">💡 Examiner Explanation:</div>
-            <div>${q.explanation}</div>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    // Function to Check Answers and Reveal Explanation
-    function checkAnswer(qId, selectedIdx, btnElement) {
-      const q = mcqData.find(item => item.id === qId);
-      const optionsContainer = document.getElementById(`options-q${qId}`);
-      const buttons = optionsContainer.querySelectorAll('.option-btn');
-      const explainBox = document.getElementById(`explain-q${qId}`);
-
-      // Disable all option buttons for this question once answered
-      buttons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === q.correct) {
-          btn.classList.add('correct');
-        }
-      });
-
-      if (selectedIdx !== q.correct) {
-        btnElement.classList.add('wrong');
-      }
-
-      explainBox.style.display = 'block';
-    }
-
-    // Filter Trigger
-    function filterQuestions() {
-      const selectedTopic = document.getElementById('topic-filter').value;
-      renderQuestions(selectedTopic);
-    }
-
-    // Initial Load
-    renderQuestions();
   </script>
 </body>
 </html>
