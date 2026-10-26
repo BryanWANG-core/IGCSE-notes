@@ -1,25 +1,28 @@
-<!-- BIOLOGY webpage by me (bryan)-->
-
+<!-- BIOLOGY webpage by Bryan -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IGCSE Biology Notes | Bryan's Vault</title>
+  <title>IGCSE Biology Performance Vault | Bryan's Vault</title>
   <!-- Chart.js Library for rendering analytics graphs -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      /* Aesthetic Dark Blue with Vibrant Orange Accent Palette */
-      --bg-gradient: linear-gradient(135deg, #0b1329 0%, #060b18 100%);
-      --card-bg: rgba(15, 23, 42, 0.75);
-      --card-bg-inner: rgba(11, 19, 41, 0.6);
-      --border: #1e293b;
+      /* Navy blue background matching chemistry/physics with vibrant neon orange accents */
+      --bg-color: #273b66;
+      --bg-gradient: linear-gradient(135deg, #273b66 0%, #152238 100%);
+      --card-bg: rgba(23, 37, 68, 0.85);
+      --card-bg-inner: rgba(15, 25, 48, 0.75);
+      --border: rgba(59, 82, 132, 0.5);
+      --border-bright: rgba(249, 115, 22, 0.4);
       --text: #f8fafc;
       --text-muted: #94a3b8;
+      
+      /* Neon Orange Palette */
       --accent-orange: #f97316;
       --accent-orange-bright: #fb923c;
-      --accent-glow: rgba(249, 115, 22, 0.3);
+      --accent-glow: rgba(249, 115, 22, 0.35);
       --danger: #ef4444;
     }
 
@@ -29,6 +32,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-color);
       background: var(--bg-gradient);
       background-attachment: fixed;
       color: var(--text);
@@ -77,7 +81,7 @@
       display: inline-block;
       background: rgba(249, 115, 22, 0.15);
       color: var(--accent-orange-bright);
-      border: 1px solid rgba(249, 115, 22, 0.4);
+      border: 1px solid var(--border-bright);
       font-size: 0.8rem;
       font-weight: 700;
       padding: 4px 10px;
@@ -93,7 +97,7 @@
       padding: 30px;
       backdrop-filter: blur(12px);
       margin-bottom: 30px;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
     }
 
     .content-card h2 {
@@ -166,7 +170,7 @@
     }
 
     .form-group input, .form-group select {
-      background: #070c1a;
+      background: rgba(10, 18, 36, 0.7);
       border: 1px solid var(--border);
       color: #fff;
       padding: 10px 14px;
@@ -183,14 +187,14 @@
 
     /* Checkbox Topic Grid */
     .topics-selector-box {
-      background: #070c1a;
+      background: rgba(10, 18, 36, 0.7);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 15px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 10px;
-      max-height: 180px;
+      max-height: 220px;
       overflow-y: auto;
     }
 
@@ -213,7 +217,7 @@
     .submit-btn {
       grid-column: 1 / -1;
       background: var(--accent-orange);
-      color: #fff;
+      color: #ffffff;
       border: none;
       padding: 12px;
       border-radius: 6px;
@@ -249,7 +253,7 @@
     }
 
     .tracker-table th {
-      background: rgba(7, 12, 26, 0.8);
+      background: rgba(10, 18, 36, 0.8);
       color: var(--text-muted);
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -261,9 +265,9 @@
     }
 
     .delete-btn {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #f87171;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
       padding: 4px 10px;
       border-radius: 4px;
       cursor: pointer;
@@ -272,12 +276,12 @@
     }
 
     .delete-btn:hover {
-      background: rgba(239, 68, 68, 0.25);
+      background: rgba(239, 68, 68, 0.3);
     }
 
     .analysis-card {
-      background: rgba(249, 115, 22, 0.08);
-      border: 1px solid rgba(249, 115, 22, 0.25);
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid var(--border-bright);
       border-radius: 8px;
       padding: 20px;
       margin-top: 25px;
@@ -310,7 +314,7 @@
     }
 
     .chart-btn {
-      background: #070c1a;
+      background: rgba(10, 18, 36, 0.7);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 8px 16px;
@@ -324,7 +328,7 @@
     .chart-btn:hover, .chart-btn.active {
       border-color: var(--accent-orange);
       color: var(--accent-orange-bright);
-      background: rgba(249, 115, 22, 0.15);
+      background: rgba(249, 115, 22, 0.2);
     }
 
     .chart-container-box {
@@ -332,11 +336,28 @@
       width: 100%;
       max-height: 400px;
       margin-top: 15px;
-      background: rgba(7, 12, 26, 0.6);
+      background: rgba(10, 18, 36, 0.7);
       border-radius: 8px;
       padding: 20px;
       border: 1px solid var(--border);
       display: none;
+    }
+
+    /* Custom Toast Modal */
+    .alert-modal {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(15, 25, 48, 0.95);
+      border: 1px solid var(--accent-orange);
+      color: #fff;
+      padding: 16px 22px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+      font-size: 0.9rem;
+      backdrop-filter: blur(8px);
     }
 
     /* Resource Accordion Styling */
@@ -346,7 +367,7 @@
 
     .accordion-btn {
       width: 100%;
-      background: var(--card-bg-inner);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       color: #ffffff;
       padding: 14px 18px;
@@ -365,7 +386,7 @@
     }
 
     .accordion-panel {
-      background: rgba(7, 12, 26, 0.4);
+      background: var(--card-bg-inner);
       border: 1px solid var(--border);
       border-top: none;
       border-bottom-left-radius: 8px;
@@ -422,6 +443,9 @@
   </style>
 </head>
 <body>
+  <!-- Toast Notification Box -->
+  <div id="customAlert" class="alert-modal"></div>
+
   <div class="container">
     <a href="index.html" class="back-btn">← Back to Revision Hub</a>
 
@@ -436,7 +460,7 @@
     <!-- Storage/Tracker Hub (Main Interface) -->
     <div class="content-card">
       <h2>📊 Personal Past Paper Logger</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your scores and missed units. Your data is privately stored strictly in your browser.</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your Biology scores and missed chapters. Your data is stored locally in your browser.</p>
 
       <!-- Statistics Dashboard Summary Cards -->
       <div class="stats-grid" style="margin-top: 20px;">
@@ -458,8 +482,8 @@
         <div class="form-group">
           <label for="paperType">Paper Type</label>
           <select id="paperType" required>
-            <option value="Paper 2 (MCQ)">Paper 2 (MCQ)</option>
-            <option value="Paper 4 (Theory)">Paper 4 (Theory)</option>
+            <option value="Paper 2 (MCQ Extended)">Paper 2 (MCQ Extended)</option>
+            <option value="Paper 4 (Extended Theory)">Paper 4 (Extended Theory)</option>
             <option value="Paper 6 (ATP)">Paper 6 (ATP)</option>
           </select>
         </div>
@@ -483,7 +507,7 @@
           <input type="text" id="paperScore" placeholder="34/40" required>
         </div>
 
-        <!-- Structured Checkbox Weakness Selector -->
+        <!-- Structured Checkbox Biology Weakness Selector -->
         <div class="form-group full-width">
           <label>Select Weak Topics / Missed Concepts from this Paper:</label>
           <div class="topics-selector-box" id="topicsSelector">
@@ -547,7 +571,7 @@
           </tbody>
         </table>
       </div>
-      <button onclick="clearAllRecords()" style="margin-top: 15px; background: transparent; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">Clear All History</button>
+      <button onclick="clearAllRecords()" style="margin-top: 15px; background: transparent; color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">Clear All History</button>
     </div>
 
     <!-- Past Paper & Topical Question Vault Accordion -->
@@ -566,22 +590,22 @@
             <ul class="resource-list">
               <li>
                 <a href="https://pastpapers.papacambridge.com/papers/caie/igcse-biology-0610" target="_blank" rel="noopener noreferrer">PapaCambridge Biology 0610 ↗</a>
-                <span class="resource-desc">Comprehensive yearly paper archive</span>
+                <span class="resource-desc">Direct link to official past paper directory</span>
               </li>
             </ul>
           </div>
 
           <div class="resource-card">
             <h3>🎯 Save My Exams & PMT (Topical)</h3>
-            <p>Chapter-by-chapter targeted questions:</p>
+            <p>Chapter-by-chapter targeted questions and revision PDFs:</p>
             <ul class="resource-list">
               <li>
-                <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">Save My Exams (Topical) ↗</a>
-                <span class="resource-desc">Structured questions with detailed marks</span>
+                <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">Save My Exams Biology 0610 ↗</a>
+                <span class="resource-desc">Structured questions with detailed worked solutions</span>
               </li>
               <li>
-                <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">Physics & Maths Tutor (PMT) ↗</a>
-                <span class="resource-desc">Free downloadable topical revision PDFs</span>
+                <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">Physics & Maths Tutor (PMT) Biology 0610 ↗</a>
+                <span class="resource-desc">Free downloadable revision notes and topical question PDFs</span>
               </li>
             </ul>
           </div>
@@ -593,6 +617,15 @@
   </div>
 
   <script>
+    function showAlert(msg) {
+      const modal = document.getElementById('customAlert');
+      modal.innerText = msg;
+      modal.style.display = 'block';
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 3500);
+    }
+
     function toggleResources() {
       const panel = document.getElementById('resource-panel');
       const icon = document.getElementById('accordion-icon');
@@ -664,9 +697,9 @@
         
         let advice = `<strong>Focus Directive:</strong> Your primary vulnerability is <strong style="color: var(--accent-orange-bright);">${topWeakness}</strong>. `;
         if (avgAccuracy < 70) {
-          advice += `Your overall accuracy is sitting at <strong>${avgAccuracy}%</strong>—prioritize reviewing textbook core definitions and complete topical question banks for: ${topThree}.`;
+          advice += `Your overall average accuracy is <strong>${avgAccuracy}%</strong>—prioritize biological diagrams, processes, and complete topical question banks for: ${topThree}.`;
         } else {
-          advice += `Solid overall average (${avgAccuracy}%). Fine-tune your weak spots by doing timed past paper runs on: ${topThree}.`;
+          advice += `Solid average accuracy (${avgAccuracy}%). Fine-tune precision on high-mark theoretical explanations for: ${topThree}.`;
         }
         document.getElementById('recommendation-text').innerHTML = advice;
       } else {
@@ -686,7 +719,7 @@
       const match = scoreInput.match(scoreRegex);
 
       if (!match) {
-        alert("Please enter a valid score format using numbers and a slash (e.g., 34/40).");
+        showAlert("Please enter a valid score format using numbers and a slash (e.g., 34/40 or 65/80).");
         return;
       }
 
@@ -694,7 +727,7 @@
       const totalMarks = parseInt(match[2]);
 
       if (scoredMarks > totalMarks) {
-        alert("Scored marks cannot be higher than total marks!");
+        showAlert("Scored marks cannot be higher than total marks!");
         return;
       }
 
@@ -727,18 +760,18 @@
     }
 
     function clearAllRecords() {
-      if (confirm("Clear all logged history?")) {
-        paperRecords = [];
-        localStorage.removeItem(USER_STORAGE_KEY);
-        renderRecords();
-        hideChart();
-      }
+      if (paperRecords.length === 0) return;
+      paperRecords = [];
+      localStorage.removeItem(USER_STORAGE_KEY);
+      renderRecords();
+      hideChart();
+      showAlert("All biology history records cleared.");
     }
 
     /* Interactive Graph Generator Logic */
     function renderChart(type) {
       if (paperRecords.length === 0) {
-        alert("Log at least 1 paper entry before generating a graph!");
+        showAlert("Log at least 1 paper entry before generating a graph!");
         return;
       }
 
@@ -751,11 +784,9 @@
         currentChartInstance.destroy();
       }
 
-      // Highlight active chart button
       document.querySelectorAll('.chart-btn').forEach(btn => btn.classList.remove('active'));
 
       if (type === 'line') {
-        // Sort chronologically for line graph
         const sortedRecords = [...paperRecords].reverse();
         const labels = sortedRecords.map(r => `${r.paper} (${r.series} ${r.year})`);
         const scores = sortedRecords.map(r => r.percentage);
@@ -783,11 +814,11 @@
               y: {
                 min: 0,
                 max: 100,
-                grid: { color: '#1e293b' },
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
                 ticks: { color: '#94a3b8' }
               },
               x: {
-                grid: { color: '#1e293b' },
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
                 ticks: { color: '#94a3b8' }
               }
             },
@@ -810,14 +841,14 @@
         const data = Object.values(topicCounts);
 
         if (labels.length === 0) {
-          alert("No topic weaknesses recorded yet! Select weak topics when logging your past papers.");
+          showAlert("No topic weaknesses recorded yet! Select weak topics when logging your past papers.");
           wrapper.style.display = 'none';
           return;
         }
 
-        const colors = [
-          '#f97316', '#3b82f6', '#10b981', '#a855f7', '#ec4899', 
-          '#eab308', '#06b6d4', '#f43f5e', '#6366f1', '#84cc16'
+        const orangePalette = [
+          '#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa',
+          '#f43f5e', '#fb7185', '#e11d48', '#d97706', '#f59e0b'
         ];
 
         currentChartInstance = new Chart(ctx, {
@@ -827,8 +858,8 @@
             datasets: [{
               label: 'Times Missed',
               data: data,
-              backgroundColor: colors.slice(0, labels.length),
-              borderColor: '#0b1329',
+              backgroundColor: orangePalette.slice(0, labels.length),
+              borderColor: '#273b66',
               borderWidth: 2
             }]
           },
@@ -839,11 +870,11 @@
               y: {
                 beginAtZero: true,
                 ticks: { stepSize: 1, color: '#94a3b8' },
-                grid: { color: '#1e293b' }
+                grid: { color: 'rgba(255, 255, 255, 0.1)' }
               },
               x: {
                 ticks: { color: '#94a3b8' },
-                grid: { color: '#1e293b' }
+                grid: { color: 'rgba(255, 255, 255, 0.1)' }
               }
             } : {},
             plugins: {
