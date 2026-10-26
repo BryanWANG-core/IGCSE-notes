@@ -13,7 +13,6 @@
       --card-bg: rgba(15, 23, 42, 0.75);
       --card-bg-inner: rgba(11, 19, 41, 0.6);
       --border: #1e293b;
-      --border-accent: #f97316; /* Vibrant Orange Border Accent */
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --accent-orange: #f97316;
@@ -144,6 +143,37 @@
       font-size: 1.4rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 14px;
+    }
+
+    /* Statistics Dashboard Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-box {
+      background: var(--card-bg-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-box h4 {
+      margin: 0 0 6px 0;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      color: var(--accent-orange-bright);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
     }
 
     /* Tracker Form Styling */
@@ -386,52 +416,6 @@
       font-size: 0.78rem;
       color: var(--text-muted);
     }
-
-    /* MCQ Special Styling Boxes */
-    .misconception-box {
-      background: rgba(239, 68, 68, 0.08);
-      border-left: 3px solid var(--danger);
-      border-radius: 6px;
-      padding: 14px;
-      margin: 12px 0;
-    }
-
-    .misconception-title {
-      font-weight: 600;
-      color: #fca5a5;
-      margin-bottom: 4px;
-      font-size: 0.95rem;
-    }
-
-    .strategy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .strategy-card {
-      background: var(--card-bg-inner);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-    }
-
-    .strategy-card h3 {
-      margin-top: 0;
-      color: var(--accent-orange-bright);
-      font-size: 1rem;
-    }
-
-    ul {
-      padding-left: 18px;
-      color: var(--text-muted);
-    }
-
-    li {
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-    }
   </style>
 </head>
 <body>
@@ -440,8 +424,8 @@
 
     <div class="header-box">
       <div>
-        <h1>Biology Revision Vault</h1>
-        <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Cambridge IGCSE 0610 • Master Study Notes & Tracker</p>
+        <h1>Biology Performance Vault</h1>
+        <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Cambridge IGCSE 0610 • Personal Analytics & Tracker</p>
       </div>
       <span class="code-badge">0610</span>
     </div>
@@ -466,8 +450,24 @@
 
     <!-- Default Storage/Tracker Hub (Always Visible) -->
     <div class="content-card">
-      <h2>📊 Past Paper Performance Vault</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your completed papers and select your weak topics below. Your data is privately stored strictly in your browser.</p>
+      <h2>📊 Personal Past Paper Logger</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your scores and missed units. Your data is privately stored strictly in your browser.</p>
+
+      <!-- Statistics Dashboard Summary Cards -->
+      <div class="stats-grid" style="margin-top: 20px;">
+        <div class="stat-box">
+          <h4>Total Papers Logged</h4>
+          <p class="stat-value" id="stat-total">0</p>
+        </div>
+        <div class="stat-box">
+          <h4>Average Accuracy</h4>
+          <p class="stat-value" id="stat-avg">0%</p>
+        </div>
+        <div class="stat-box">
+          <h4>Top Weak Unit</h4>
+          <p class="stat-value" id="stat-weak" style="font-size: 1rem; padding-top: 4px;">None yet</p>
+        </div>
+      </div>
 
       <form class="tracker-form" onsubmit="addPaperRecord(event)">
         <div class="form-group">
@@ -523,13 +523,13 @@
           </div>
         </div>
 
-        <button type="submit" class="submit-btn">Save Record & Update Analysis</button>
+        <button type="submit" class="submit-btn">Save Record & Update Statistics</button>
       </form>
 
-      <!-- Smart Weakness Recommendation Box -->
+      <!-- Smart Advice & Analytics Box -->
       <div class="analysis-card" id="recommendation-box">
-        <h3>💡 Personal Weakness Analysis</h3>
-        <p id="recommendation-text">No past paper entries logged yet. Add your first record above to start generating standardized weakness trends.</p>
+        <h3>🎯 Optimal Action Advice</h3>
+        <p id="recommendation-text">No past paper entries logged yet. Log your first paper above to receive customized focus advice.</p>
       </div>
 
       <!-- Logged Records Table -->
@@ -557,84 +557,7 @@
       
       <!-- MCQ Section View -->
       <div id="section-mcq" style="display: none;">
-        <h2>📝 Paper 2: MCQ Strategy & High-Yield Traps</h2>
-        
-        <!-- Expandable Past Paper Vault Button -->
-        <div class="resource-accordion">
-          <button class="accordion-btn" onclick="toggleResources()">
-            <span>📚 Past Paper & Topical Question Vault</span>
-            <span id="accordion-icon">▼</span>
-          </button>
-          
-          <div id="resource-panel" class="accordion-panel" style="display: none;">
-            <div class="resource-grid">
-              
-              <!-- Full Past Papers Category -->
-              <div class="resource-card">
-                <h3>📁 Full Past Papers (0610 Paper 2)</h3>
-                <p>Complete yearly papers with official mark schemes:</p>
-                <ul class="resource-list">
-                  <li>
-                    <a href="https://pastpapers.papacambridge.com/papers/caie/igcse-biology-0610" target="_blank" rel="noopener noreferrer">PapaCambridge 0610 ↗</a>
-                    <span class="resource-desc">Full paper & mark scheme archive</span>
-                  </li>
-                  <li>
-                    <a href="https://ebooks.papacambridge.com/viewer/caie/cambridge-upper-secondarycambridge-igcse-biology-0610-cambridge-igcse-biology-workbook-third-edition-public-20pdf" target="_blank" rel="noopener noreferrer">Full Textbook PDF ↗</a>
-                    <span class="resource-desc">Fast PDF downloads</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Topical Past Papers Category -->
-              <div class="resource-card">
-                <h3>🎯 Topical Questions</h3>
-                <p>Practice grouped strictly by chapter:</p>
-                <ul class="resource-list">
-                  <li>
-                    <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">Save My Exams ↗</a>
-                    <span class="resource-desc">Categorized questions with mark schemes</span>
-                  </li>
-                  <li>
-                    <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">PMT Biology ↗</a>
-                    <span class="resource-desc">Free topical question PDFs</span>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <h3 style="color: #fff; margin-top: 25px; font-size: 1.1rem;">⚠️ Frequently Tested Misconceptions</h3>
-
-        <div class="misconception-box">
-          <div class="misconception-title">❌ Trap 1: "Enzymes die or are killed at high temperatures"</div>
-          <div style="color: var(--text-muted); font-size: 0.9rem;">Enzymes are non-living proteins; they denature permanently at high temperatures as their active site shape changes, blocking substrates.</div>
-        </div>
-
-        <div class="misconception-box">
-          <div class="misconception-title">❌ Trap 2: "Osmosis is just water moving from high to low concentration"</div>
-          <div style="color: var(--text-muted); font-size: 0.9rem;">Always state <strong>water potential</strong>! It is the net movement from higher to lower water potential through a partially permeable membrane.</div>
-        </div>
-
-        <div class="misconception-box">
-          <div class="misconception-title">❌ Trap 3: "Arteries always carry oxygenated blood"</div>
-          <div style="color: var(--text-muted); font-size: 0.9rem;">Arteries carry blood <em>away from the heart</em>. The <strong>pulmonary artery</strong> carries deoxygenated blood to the lungs.</div>
-        </div>
-
-        <h3 style="color: #fff; margin-top: 30px; font-size: 1.1rem;">📌 Quick-Recall Rules</h3>
-        <div class="strategy-grid">
-          <div class="strategy-card">
-            <h3>🔬 Magnification</h3>
-            <p><strong>I = A × M</strong>. Always convert mm to µm by multiplying by <strong>1,000</strong> before computing.</p>
-          </div>
-
-          <div class="strategy-card">
-            <h3>🌱 Plant Transport</h3>
-            <p><strong>Xylem:</strong> Dead tissue, unidirectional water/salts.<br><strong>Phloem:</strong> Living tissue, bidirectional sugars/amino acids.</p>
-          </div>
-        </div>
-
+        <h2>📝 Paper 2: MCQ Strategy & High-Yield Vault</h2>
       </div>
 
       <!-- Theory Section View -->
@@ -650,9 +573,50 @@
       </div>
 
     </div>
+
+    <!-- Past Paper & Topical Question Vault Accordion -->
+    <div class="resource-accordion">
+      <button class="accordion-btn" onclick="toggleResources()">
+        <span>📚 Past Paper & Topical Question Vault (0610)</span>
+        <span id="accordion-icon">▼</span>
+      </button>
+      
+      <div id="resource-panel" class="accordion-panel" style="display: none;">
+        <div class="resource-grid">
+          
+          <div class="resource-card">
+            <h3>📁 PapaCambridge (0610 Archive)</h3>
+            <p>Full yearly past papers and official mark schemes:</p>
+            <ul class="resource-list">
+              <li>
+                <a href="https://papacambridge.com/igcse-biology-0610/" target="_blank" rel="noopener noreferrer">PapaCambridge Biology 0610 ↗</a>
+                <span class="resource-desc">Comprehensive yearly paper archive</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="resource-card">
+            <h3>🎯 Save My Exams & PMT (Topical)</h3>
+            <p>Chapter-by-chapter targeted questions:</p>
+            <ul class="resource-list">
+              <li>
+                <a href="https://www.savemyexams.com/igcse/biology/cie/23/topic-questions/" target="_blank" rel="noopener noreferrer">Save My Exams (Topical) ↗</a>
+                <span class="resource-desc">Structured questions with detailed marks</span>
+              </li>
+              <li>
+                <a href="https://www.physicsandmathstutor.com/biology-revision/igcse-cie/" target="_blank" rel="noopener noreferrer">Physics & Maths Tutor (PMT) ↗</a>
+                <span class="resource-desc">Free downloadable topical revision PDFs</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 
-    <script>
+  <script>
     function openPaper(paper) {
       const contentView = document.getElementById('content-view');
       const secMcq = document.getElementById('section-mcq');
@@ -700,7 +664,6 @@
       }
     }
 
-    // Isolated Personal Storage Key
     const USER_STORAGE_KEY = 'bryan_bio_user_vault_data';
     let paperRecords = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)) || [];
 
@@ -710,17 +673,23 @@
 
       if (paperRecords.length === 0) {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No records logged yet.</td></tr>`;
-        document.getElementById('recommendation-text').innerHTML = "No past paper entries logged yet. Select your weak topics above when saving a record to start generating analytics.";
+        document.getElementById('stat-total').innerText = '0';
+        document.getElementById('stat-avg').innerText = '0%';
+        document.getElementById('stat-weak').innerText = 'None';
+        document.getElementById('recommendation-text').innerHTML = "No past paper entries logged yet. Log your first paper above to receive customized focus advice.";
         return;
       }
 
+      let totalPercentage = 0;
       const topicCounts = {};
 
       paperRecords.forEach((record, index) => {
         const row = document.createElement('tr');
         const topicsList = record.topics && record.topics.length > 0 ? record.topics.join(', ') : 'None selected';
-        const displayScore = record.percentage !== undefined ? `${record.score} (${record.percentage}%)` : record.score;
+        const displayScore = `${record.score} (${record.percentage}%)`;
         
+        totalPercentage += record.percentage;
+
         row.innerHTML = `
           <td><strong>${record.paper}</strong></td>
           <td>${record.series} ${record.year}</td>
@@ -737,12 +706,29 @@
         }
       });
 
+      const totalPapers = paperRecords.length;
+      const avgAccuracy = Math.round(totalPercentage / totalPapers);
+      document.getElementById('stat-total').innerText = totalPapers;
+      document.getElementById('stat-avg').innerText = avgAccuracy + '%';
+
       const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
+      
       if (sortedTopics.length > 0) {
-        const topWeaknesses = sortedTopics.slice(0, 3).map(t => `<strong style="color: #fff;">${t}</strong> (${topicCounts[t]} missed)`).join(', ');
-        document.getElementById('recommendation-text').innerHTML = `<strong>In-Depth Mistake Analysis:</strong> Your most frequently missed units are ${topWeaknesses}. Prioritize these in your next revision block!`;
+        const topWeakness = sortedTopics[0];
+        document.getElementById('stat-weak').innerText = topWeakness;
+
+        const topThree = sortedTopics.slice(0, 3).map(t => `<strong style="color: #fff;">${t}</strong> (${topicCounts[t]} missed)`).join(', ');
+        
+        let advice = `<strong>Focus Directive:</strong> Your primary vulnerability is <strong style="color: var(--accent-orange-bright);">${topWeakness}</strong>. `;
+        if (avgAccuracy < 70) {
+          advice += `Your overall accuracy is sitting at <strong>${avgAccuracy}%</strong>—prioritize reviewing textbook core definitions and complete topical question banks for: ${topThree}.`;
+        } else {
+          advice += `Solid overall average (${avgAccuracy}%). Fine-tune your weak spots by doing timed past paper runs on: ${topThree}.`;
+        }
+        document.getElementById('recommendation-text').innerHTML = advice;
       } else {
-        document.getElementById('recommendation-text').innerHTML = "No weak topics selected in current records.";
+        document.getElementById('stat-weak').innerText = 'None';
+        document.getElementById('recommendation-text').innerHTML = "Make sure to check off your missed topics when logging papers to receive targeted weakness advice.";
       }
     }
 
@@ -753,7 +739,6 @@
       const year = document.getElementById('examYear').value;
       const scoreInput = document.getElementById('paperScore').value.trim();
 
-      // Strict Score Validation (e.g. 34/40)
       const scoreRegex = /^(\d+)\s*\/\s*(\d+)$/;
       const match = scoreInput.match(scoreRegex);
 
@@ -770,10 +755,8 @@
         return;
       }
 
-      // Calculate percentage for future analytics & graphs
       const percentage = Math.round((scoredMarks / totalMarks) * 100);
 
-      // Gather checked topics
       const checkboxes = document.querySelectorAll('#topicsSelector input[type="checkbox"]:checked');
       const topics = Array.from(checkboxes).map(cb => cb.value);
 
@@ -788,7 +771,6 @@
       
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(paperRecords));
 
-      // Reset form fields
       document.getElementById('paperScore').value = '';
       checkboxes.forEach(cb => cb.checked = false);
 
