@@ -1,2 +1,2 @@
 # IGCSE-notes
-MADE BY BRYAN. Stores all the notes and resources I have used or created.
+MADE BY BRYAN. Stores all the notes and resources I have used or created along with a personal past paper mark logger. User's weakness based on topics are counted and analysed using a diagram or graph. This helps the user to be able to easily identify areas of improvement along with sharpening their skills more easily with our custom built daily MCQs based on the user's errors (this helps them to learn a new thing each day without heavy cognitive fatigue of a full paper)
