@@ -500,3 +500,53 @@
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Back to Revision Hub</a>
+
+    <div class="header-box">
+      <div>
+        <h1>Physics Performance Vault</h1>
+        <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Cambridge IGCSE 0625 • Personal Analytics & Tracker</p>
+      </div>
+      <div class="header-right">
+        <span class="code-badge">0625</span>
+      </div>
+    </div>
+
+    <!-- Multi-Device Cloud Sync Banner -->
+    <div class="auth-banner">
+      <div class="auth-status">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Storage Mode: <strong>Local Browser Storage</strong></span>
+      </div>
+      <button class="auth-btn" id="cloudBtn" onclick="toggleCloudSync()">☁️ Enable Google Cloud Sync</button>
+    </div>
+
+    <!-- Storage / Tracker Hub -->
+    <div class="content-card">
+      <h2>📊 Personal Past Paper Logger</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Log your scores and missed concepts below to build your analytical profile.</p>
+
+      <!-- Dashboard Statistics -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h4>Total Papers Logged</h4>
+          <p class="stat-value" id="stat-total">0</p>
+        </div>
+        <div class="stat-box">
+          <h4>Average Accuracy</h4>
+          <p class="stat-value" id="stat-avg">0%</p>
+        </div>
+        <div class="stat-box">
+          <h4>Top Weak Unit</h4>
+          <p class="stat-value" id="stat-weak" style="font-size: 1rem; padding-top: 4px;">None yet</p>
+        </div>
+      </div>
+
+      <!-- Past Paper Input Form -->
+      <form class="tracker-form" onsubmit="addPaperRecord(event)">
+        <div class="form-group">
+          <label for="paperType">Paper Type</label
