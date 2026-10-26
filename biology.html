@@ -6,6 +6,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IGCSE Biology Notes | Bryan's Vault</title>
+  <!-- Chart.js Library for rendering analytics graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
       /* Aesthetic Dark Blue with Vibrant Orange Accent Palette */
@@ -81,49 +83,6 @@
       padding: 4px 10px;
       border-radius: 6px;
       box-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    /* 3 Main Selection Cards Grid */
-    .paper-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 35px;
-    }
-
-    .paper-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: all 0.25s ease;
-    }
-
-    .paper-card:hover {
-      border-color: var(--accent-orange);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px -10px var(--accent-glow);
-    }
-
-    .paper-card.active {
-      border-color: var(--accent-orange-bright);
-      background: rgba(249, 115, 22, 0.12);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .paper-card h2 {
-      color: #fff;
-      margin: 0 0 6px 0;
-      font-size: 1.25rem;
-    }
-
-    .paper-card p {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin: 0;
     }
 
     /* Section Content Box */
@@ -336,6 +295,50 @@
       font-size: 0.95rem;
     }
 
+    /* Chart Control Section */
+    .chart-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 25px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: var(--card-bg-inner);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .chart-btn {
+      background: #070c1a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chart-btn:hover, .chart-btn.active {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange-bright);
+      background: rgba(249, 115, 22, 0.15);
+    }
+
+    .chart-container-box {
+      position: relative;
+      width: 100%;
+      max-height: 400px;
+      margin-top: 15px;
+      background: rgba(7, 12, 26, 0.6);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      display: none;
+    }
+
     /* Resource Accordion Styling */
     .resource-accordion {
       margin: 20px 0 25px 0;
@@ -430,25 +433,7 @@
       <span class="code-badge">0610</span>
     </div>
 
-    <!-- 3 Simple Main Paper Buttons -->
-    <div class="paper-grid">
-      <div class="paper-card" id="card-mcq" onclick="openPaper('mcq')">
-        <h2>📝 MCQ</h2>
-        <p>Paper 2 Multiple Choice</p>
-      </div>
-
-      <div class="paper-card" id="card-theory" onclick="openPaper('theory')">
-        <h2>📄 Theory</h2>
-        <p>Paper 4 Extended Theory</p>
-      </div>
-
-      <div class="paper-card" id="card-atp" onclick="openPaper('atp')">
-        <h2>🔬 ATP</h2>
-        <p>Paper 6 Alternative to Practical</p>
-      </div>
-    </div>
-
-    <!-- Default Storage/Tracker Hub (Always Visible) -->
+    <!-- Storage/Tracker Hub (Main Interface) -->
     <div class="content-card">
       <h2>📊 Personal Past Paper Logger</h2>
       <p style="color: var(--text-muted); font-size: 0.9rem;">Log your scores and missed units. Your data is privately stored strictly in your browser.</p>
@@ -526,6 +511,19 @@
         <button type="submit" class="submit-btn">Save Record & Update Statistics</button>
       </form>
 
+      <!-- Dynamic Graph Generator Section -->
+      <div class="chart-controls">
+        <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">📈 Analytics Visualizer:</span>
+        <button class="chart-btn" onclick="renderChart('line')">Score Trend (Line)</button>
+        <button class="chart-btn" onclick="renderChart('bar')">Topic Weakness Frequency (Bar)</button>
+        <button class="chart-btn" onclick="renderChart('pie')">Weakness Share (Pie)</button>
+        <button class="chart-btn" onclick="hideChart()" style="margin-left: auto; color: var(--text-muted);">Hide Graph</button>
+      </div>
+
+      <div class="chart-container-box" id="chartWrapper">
+        <canvas id="performanceChart"></canvas>
+      </div>
+
       <!-- Smart Advice & Analytics Box -->
       <div class="analysis-card" id="recommendation-box">
         <h3>🎯 Optimal Action Advice</h3>
@@ -552,28 +550,6 @@
       <button onclick="clearAllRecords()" style="margin-top: 15px; background: transparent; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">Clear All History</button>
     </div>
 
-    <!-- Dynamic Section View Area -->
-    <div id="content-view" class="content-card" style="display: none;">
-      
-      <!-- MCQ Section View -->
-      <div id="section-mcq" style="display: none;">
-        <h2>📝 Paper 2: MCQ Strategy & High-Yield Vault</h2>
-      </div>
-
-      <!-- Theory Section View -->
-      <div id="section-theory" style="display: none;">
-        <h2>📄 Paper 4: Theory Notes</h2>
-        <p style="color: var(--text-muted);">Coming soon...</p>
-      </div>
-
-      <!-- ATP Section View -->
-      <div id="section-atp" style="display: none;">
-        <h2>🔬 Paper 6: ATP Notes</h2>
-        <p style="color: var(--text-muted);">Coming soon...</p>
-      </div>
-
-    </div>
-
     <!-- Past Paper & Topical Question Vault Accordion -->
     <div class="resource-accordion">
       <button class="accordion-btn" onclick="toggleResources()">
@@ -589,7 +565,7 @@
             <p>Full yearly past papers and official mark schemes:</p>
             <ul class="resource-list">
               <li>
-                <a href="https://papacambridge.com/igcse-biology-0610/" target="_blank" rel="noopener noreferrer">PapaCambridge Biology 0610 ↗</a>
+                <a href="https://pastpapers.papacambridge.com/papers/caie/igcse-biology-0610" target="_blank" rel="noopener noreferrer">PapaCambridge Biology 0610 ↗</a>
                 <span class="resource-desc">Comprehensive yearly paper archive</span>
               </li>
             </ul>
@@ -617,40 +593,6 @@
   </div>
 
   <script>
-    function openPaper(paper) {
-      const contentView = document.getElementById('content-view');
-      const secMcq = document.getElementById('section-mcq');
-      const secTheory = document.getElementById('section-theory');
-      const secAtp = document.getElementById('section-atp');
-
-      const cardMcq = document.getElementById('card-mcq');
-      const cardTheory = document.getElementById('card-theory');
-      const cardAtp = document.getElementById('card-atp');
-
-      cardMcq.classList.remove('active');
-      cardTheory.classList.remove('active');
-      cardAtp.classList.remove('active');
-
-      secMcq.style.display = 'none';
-      secTheory.style.display = 'none';
-      secAtp.style.display = 'none';
-
-      contentView.style.display = 'block';
-
-      if (paper === 'mcq') {
-        cardMcq.classList.add('active');
-        secMcq.style.display = 'block';
-      } else if (paper === 'theory') {
-        cardTheory.classList.add('active');
-        secTheory.style.display = 'block';
-      } else if (paper === 'atp') {
-        cardAtp.classList.add('active');
-        secAtp.style.display = 'block';
-      }
-
-      contentView.scrollIntoView({ behavior: 'smooth' });
-    }
-
     function toggleResources() {
       const panel = document.getElementById('resource-panel');
       const icon = document.getElementById('accordion-icon');
@@ -666,6 +608,7 @@
 
     const USER_STORAGE_KEY = 'bryan_bio_user_vault_data';
     let paperRecords = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)) || [];
+    let currentChartInstance = null;
 
     function renderRecords() {
       const tbody = document.getElementById('tracker-table-body');
@@ -788,6 +731,135 @@
         paperRecords = [];
         localStorage.removeItem(USER_STORAGE_KEY);
         renderRecords();
+        hideChart();
+      }
+    }
+
+    /* Interactive Graph Generator Logic */
+    function renderChart(type) {
+      if (paperRecords.length === 0) {
+        alert("Log at least 1 paper entry before generating a graph!");
+        return;
+      }
+
+      const wrapper = document.getElementById('chartWrapper');
+      wrapper.style.display = 'block';
+
+      const ctx = document.getElementById('performanceChart').getContext('2d');
+
+      if (currentChartInstance) {
+        currentChartInstance.destroy();
+      }
+
+      // Highlight active chart button
+      document.querySelectorAll('.chart-btn').forEach(btn => btn.classList.remove('active'));
+
+      if (type === 'line') {
+        // Sort chronologically for line graph
+        const sortedRecords = [...paperRecords].reverse();
+        const labels = sortedRecords.map(r => `${r.paper} (${r.series} ${r.year})`);
+        const scores = sortedRecords.map(r => r.percentage);
+
+        currentChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Score Percentage (%)',
+              data: scores,
+              borderColor: '#f97316',
+              backgroundColor: 'rgba(249, 115, 22, 0.15)',
+              borderWidth: 3,
+              fill: true,
+              tension: 0.35,
+              pointBackgroundColor: '#fb923c',
+              pointRadius: 5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                min: 0,
+                max: 100,
+                grid: { color: '#1e293b' },
+                ticks: { color: '#94a3b8' }
+              },
+              x: {
+                grid: { color: '#1e293b' },
+                ticks: { color: '#94a3b8' }
+              }
+            },
+            plugins: {
+              legend: { labels: { color: '#f8fafc' } }
+            }
+          }
+        });
+      } else if (type === 'bar' || type === 'pie') {
+        const topicCounts = {};
+        paperRecords.forEach(r => {
+          if (r.topics) {
+            r.topics.forEach(t => {
+              topicCounts[t] = (topicCounts[t] || 0) + 1;
+            });
+          }
+        });
+
+        const labels = Object.keys(topicCounts);
+        const data = Object.values(topicCounts);
+
+        if (labels.length === 0) {
+          alert("No topic weaknesses recorded yet! Select weak topics when logging your past papers.");
+          wrapper.style.display = 'none';
+          return;
+        }
+
+        const colors = [
+          '#f97316', '#3b82f6', '#10b981', '#a855f7', '#ec4899', 
+          '#eab308', '#06b6d4', '#f43f5e', '#6366f1', '#84cc16'
+        ];
+
+        currentChartInstance = new Chart(ctx, {
+          type: type,
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Times Missed',
+              data: data,
+              backgroundColor: colors.slice(0, labels.length),
+              borderColor: '#0b1329',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: type === 'bar' ? {
+              y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1, color: '#94a3b8' },
+                grid: { color: '#1e293b' }
+              },
+              x: {
+                ticks: { color: '#94a3b8' },
+                grid: { color: '#1e293b' }
+              }
+            } : {},
+            plugins: {
+              legend: { labels: { color: '#f8fafc' } }
+            }
+          }
+        });
+      }
+    }
+
+    function hideChart() {
+      const wrapper = document.getElementById('chartWrapper');
+      wrapper.style.display = 'none';
+      if (currentChartInstance) {
+        currentChartInstance.destroy();
+        currentChartInstance = null;
       }
     }
 
